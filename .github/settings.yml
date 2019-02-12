@@ -2,7 +2,7 @@
 repository:
   description: "Nginx Proxy Manager - Community Hass.io Add-on for Home Assistant"
   homepage: https://addons.community
-  topics: Nginx Proxy Manager, nginx, proxy, networking, hassio-addons, hassio, hass, home-assistant, homeassistant
+  topics: reverse-proxy, nginx, proxy, networking, hassio-addons, hassio, hass, home-assistant, homeassistant
   private: false
   has_issues: true
   has_projects: false
