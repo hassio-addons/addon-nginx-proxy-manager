@@ -31,10 +31,6 @@ RUN \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
         "https://github.com/jc21/nginx-proxy-manager/archive/2.0.8.tar.gz" \
     \
-    && curl -s -f -L \
-        "https://install.goreleaser.com/github.com/tj/node-prune.sh" \
-            | bash -s -- -b /tmp \
-    \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \
@@ -45,7 +41,6 @@ RUN \
     && npm run-script build \
     && rm -rf node_modules \
     && yarn install --prod \
-    && /tmp/node-prune \
     \
     && mkdir -p /opt/nginx-proxy-manager/src \
     && cp -r /app/dist /opt/nginx-proxy-manager/ \
