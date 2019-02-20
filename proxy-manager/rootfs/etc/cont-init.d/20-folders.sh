@@ -39,12 +39,6 @@ if ! hass.directory_exists "/ssl/nginxproxymanager"; then
         /ssl/nginxproxymanager
 fi
 
-# TODO: Fix the lets encrypt folders
-if ! hass.file_exists [ -f ~/.config/letsencrypt/cli.ini ]; then
-    mkdir -p ~/.config/letsencrypt || true
-    cp /defaults/cli.ini ~/.config/letsencrypt/cli.ini
-fi
-
 # Creates basic temporary files directory structure
 # Needed for caching
 mkdir -p \
@@ -61,7 +55,7 @@ ln -sf /proc/1/fd/1 /data/logs/default.log
 ln -sf /proc/1/fd/1 /data/logs/manager.log
 ln -sf /proc/1/fd/1 /data/logs/letsencrypt-requests.log
 
-ln -sf /ssl/nginxproxymanager /etc/letencrypt
+ln -sf /ssl/nginxproxymanager /etc/letsencrypt
 
 # NGinx needs this file to be able to start.
 # It will not continously log into it.
