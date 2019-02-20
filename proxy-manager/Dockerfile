@@ -28,9 +28,9 @@ RUN \
         dnsmasq=2.79-r3 \
         libcap=2.25-r1 \
     \
-    && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
-        "https://github.com/jc21/nginx-proxy-manager/archive/2.0.8.tar.gz" \
     \
+    && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
+        "https://github.com/jc21/nginx-proxy-manager/archive/2.0.9.tar.gz" \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \
