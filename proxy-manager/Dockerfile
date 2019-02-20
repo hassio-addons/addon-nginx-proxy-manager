@@ -36,6 +36,13 @@ RUN \
         /tmp/nginxproxymanager.tar.gz \
         --strip 1 -C /app \
     \
+    && sed -i "s#canShow('streams')#false#g" \
+        /app/src/frontend/js/app/ui/menu/main.ejs \
+    && sed -i "s#canShow('streams')#false#g" \
+        /app/src/frontend/js/app/dashboard/main.ejs \
+    && sed -i "s#, 'streams',#,#g" \
+        /app/src/frontend/js/app/user/permissions.ejs \
+    \
     && cd /app \
     && yarn install \
     && npm run-script build \
