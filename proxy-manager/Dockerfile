@@ -103,12 +103,12 @@ ARG BUILD_VERSION
 # Labels
 LABEL \
     io.hass.name="Nginx Proxy Manager" \
-    io.hass.description="Lorem ipsum" \
+    io.hass.description="Manage Nginx proxy hosts with a simple, powerful interface." \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
     maintainer="Franck Nijhof <frenck@addons.community>" \
-    org.label-schema.description="Lorem ipsum" \
+    org.label-schema.description="Manage Nginx proxy hosts with a simple, powerful interface" \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Nginx Proxy Manager" \
     org.label-schema.schema-version="1.0" \

@@ -15,11 +15,22 @@
 
 [![Support my work on Patreon][patreon-shield]][patreon]
 
-Lorem ipsum
+Manage Nginx proxy hosts with a simple, powerful interface.
 
 ## About
 
-Lorem ipsum
+This add-on enables you to easily forward incoming connections to anywhere,
+including free SSL, without having to know too much about Nginx or Letsencrypt.
+
+Forward you domain to your Home Assistant, Hass.io add-ons, or websites running
+at home or anywhere else, straight from a simple, powerful interface.
+
+Want to protect the website with a username/password? Well, it can do that too!
+Enable authentication and create a list of usernames/password that can access
+that specific application.
+
+For the power users, you can customize the behavior of each host in the
+Nginx proxy manager by providing additional Nginx directives.
 
 ## Installation
 
@@ -30,6 +41,10 @@ comparison to installing any other Hass.io add-on.
 1. Install the "Nginx Proxy Manager" add-on.
 1. Start the "Nginx Proxy Manager" add-on
 1. Check the logs of the "Nginx Proxy Manager" add-on to see if everything went well.
+1. Click the "OPEN WEB UI" button and login using:
+   `admin@example.com` / `changeme`
+1. Forward port `80` and `443` from your router to your Hass.io machine.
+1. Enjoy the add-on!
 
 **NOTE**: Do not add this repository to Hass.io, please use:
 `https://github.com/hassio-addons/repository`.
@@ -75,6 +90,15 @@ Please note that each level automatically includes log messages from a
 more severe level, e.g., `debug` also shows `info` messages. By default,
 the `log_level` is set to `info`, which is the recommended setting unless
 you are troubleshooting.
+
+## Known issues and limitations
+
+- The original NGinx Proxy Manager has support for forwarding TCP/UP streams,
+  which is removed from this add-on. It makes no sense from a
+  Hass.io / Home Assistant / Home perspective and, by removing it, it also
+  removed the need for this add-on to run on the Docker host network.
+- Creating proxies from subfolder (e.g., `host.tld/node-red`) is not supported
+  yet. This feature is expected in the near future.
 
 ## Changelog & Releases
 

@@ -2,7 +2,7 @@
   "name": "Nginx Proxy Manager",
   "version": "dev",
   "slug": "nginxproxymanager",
-  "description": "Lorem ipsum",
+  "description": "Manage Nginx proxy hosts with a simple, powerful interface",
   "url": "https://github.com/hassio-addons/addon-nginx-proxy-manager",
   "webui": "http://[HOST]:[PORT:81]",
   "startup": "application",
