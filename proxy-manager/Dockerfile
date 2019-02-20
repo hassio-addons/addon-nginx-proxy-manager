@@ -49,12 +49,8 @@ RUN \
     && cp -r /app/package.json /opt/nginx-proxy-manager/ \
     && cp -r /app/src/backend /opt/nginx-proxy-manager/src/ \
     \
-    && sed -i 's#/data/logs/dead_host-{{ id }}.log#/proc/1/fd/1#g' \
-        /opt/nginx-proxy-manager/src/backend/templates/dead_host.conf \
-    && sed -i 's#/data/logs/redirection_host-{{ id }}.log#/proc/1/fd/1#g' \
-        /opt/nginx-proxy-manager/src/backend/templates/redirection_host.conf \
-    && sed -i 's#/data/logs/proxy_host-{{ id }}.log#/proc/1/fd/1#g' \
-        /opt/nginx-proxy-manager/src/backend/templates/proxy_host.conf \
+    && rm -f -r /etc/nginx \
+    && cp -r /app/rootfs/etc/nginx /etc/nginx \
     \
     && mkdir -p \
         /run/mysqld \
@@ -64,7 +60,6 @@ RUN \
         /app \
         /etc/init.d/nginx \
         /etc/logrotate.d/nginx \
-        /etc/nginx \
         /opt/nginx-proxy-manager/node_modules/bcrypt/build \
         /tmp/.[!.]* \
         /tmp/* \
@@ -73,8 +68,7 @@ RUN \
         /var/lib/nginx \
         /var/log/nginx \
         /var/tmp/nginx \
-        /var/www \
-    && apk del --purge .build-dependencies
+        /var/www
 
 # Copy root filesystem
 COPY rootfs /
