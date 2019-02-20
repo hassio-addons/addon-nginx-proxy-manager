@@ -28,6 +28,7 @@ RUN \
         dnsmasq=2.79-r3 \
         libcap=2.25-r1 \
     \
+    && yarn global add modclean \
     \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
         "https://github.com/jc21/nginx-proxy-manager/archive/2.0.9.tar.gz" \
@@ -47,7 +48,7 @@ RUN \
     && yarn install \
     && npm run-script build \
     && rm -rf node_modules \
-    && yarn install --prod \
+    && yarn install --production \
     \
     && mkdir -p /opt/nginx-proxy-manager/src \
     && cp -r /app/dist /opt/nginx-proxy-manager/ \
@@ -63,14 +64,27 @@ RUN \
         /run/mysqld \
         /run/nginx \
     \
+    && modclean \
+        --path /opt/nginx-proxy-manager \
+        --no-progress \
+        --keep-empty \
+        --run \
+    \
+    && yarn global remove modclean \
+    && yarn cache clean \
+    \
+    && apk del --purge .build-dependencies \
+    \
     && rm -f -r \
         /app \
         /etc/init.d/nginx \
         /etc/logrotate.d/nginx \
         /opt/nginx-proxy-manager/node_modules/bcrypt/build \
+        /root/.node-gyp \
         /tmp/.[!.]* \
         /tmp/* \
         /usr/lib/node_modules \
+        /usr/local/share/.cache \
         /var/lib/mysql \
         /var/lib/nginx \
         /var/log/nginx \
