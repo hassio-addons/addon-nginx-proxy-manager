@@ -22,7 +22,7 @@ Manage Nginx proxy hosts with a simple, powerful interface.
 This add-on enables you to easily forward incoming connections to anywhere,
 including free SSL, without having to know too much about Nginx or Letsencrypt.
 
-Forward you domain to your Home Assistant, Hass.io add-ons, or websites running
+Forward your domain to your Home Assistant, Hass.io add-ons, or websites running
 at home or anywhere else, straight from a simple, powerful interface.
 
 Want to protect the website with a username/password? Well, it can do that too!
@@ -93,7 +93,7 @@ you are troubleshooting.
 
 ## Known issues and limitations
 
-- The original NGinx Proxy Manager has support for forwarding TCP/UP streams,
+- The original NGinx Proxy Manager has support for forwarding TCP/UDP streams,
   which is removed from this add-on. It makes no sense from a
   Hass.io / Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
