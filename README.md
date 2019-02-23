@@ -32,6 +32,13 @@ that specific application.
 For the power users, you can customize the behavior of each host in the
 Nginx proxy manager by providing additional Nginx directives.
 
+## Reverse Proxy, What is it?
+
+A reverse proxy server is a type of proxy server that typically sits behind the firewall
+in a private network and directs client requests to the appropriate backend server. 
+A reverse proxy provides an additional level of abstraction and control to ensure the 
+smooth flow of network traffic between clients and servers.
+
 ## Installation
 
 The installation of this add-on is pretty straightforward and not different in
