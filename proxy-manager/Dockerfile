@@ -24,7 +24,7 @@ RUN \
         nginx-mod-stream=1.14.2-r0 \
         nginx=1.14.2-r0 \
         nodejs=8.14.0-r0 \
-        openssl=1.0.2q-r0 \
+        openssl=1.0.2r-r0 \
         dnsmasq=2.79-r3 \
         libcap=2.25-r1 \
     \
