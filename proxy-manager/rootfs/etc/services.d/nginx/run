@@ -1,10 +1,8 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # Runs the nginx proxy manager interface
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 # Create required folders
 mkdir -p \

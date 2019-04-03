@@ -1,23 +1,21 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # This file init the MySQL database
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 # Initialize the database data directory.
-if ! hass.directory_exists "/data/mysql/mysql"; then
+if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
 
-    hass.log.info "Initializing database..."
+    bashio::log.info "Initializing database..."
     s6-setuidgid mysql mysql_install_db --datadir=/data/mysql
-
     # Start MySQL.
-    s6-setuidgid mysql /usr/bin/mysqld --datadir /data/mysql --tmpdir /tmp/ &
+    /usr/bin/mysqld_safe --datadir=/data/mysql \
+        --tmpdir=/tmp/ &
     rc="$?"
     pid="$!"
     if [ "$rc" -ne 0 ]; then
-        hass.die "Failed to start the database."
+        bashio::exit.nok "Failed to start the database."
     fi
 
     # Wait until it is ready.
@@ -32,14 +30,16 @@ if ! hass.directory_exists "/data/mysql/mysql"; then
     printf '\nn\n\n\n\n\n' | /usr/bin/mysql_secure_installation
 
     # Create the database.
+    bashio::log.info "Creating Database..."
     echo "CREATE DATABASE IF NOT EXISTS \`nginxproxymanager\` ;" | mysql
 
     # Create the user.
-    echo "CREATE USER 'nginxproxymanager'@'%' IDENTIFIED BY 'nginxproxymanager' ;" | mysql
-    echo "GRANT ALL ON \`nginxproxymanager\`.* TO 'nginxproxymanager'@'%' ;" | mysql
+    bashio::log.info "Creating User..."
+    echo "CREATE USER 'nginxproxymanager'@'localhost' IDENTIFIED BY 'nginxproxymanager' ;" | mysql
+    echo "GRANT ALL ON \`nginxproxymanager\`.* TO 'nginxproxymanager'@'localhost' ;" | mysql
 
     # Stop the MySQL server
     if ! kill -s TERM "$pid" || ! wait "$pid"; then
-        hass.die "Initialization of database failed."
+        bashio::exit.nok "Initialization of database failed."
     fi
 fi

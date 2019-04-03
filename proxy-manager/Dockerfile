@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:2.3.2
+ARG BUILD_FROM=hassioaddons/base:3.0.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -10,28 +10,28 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r1 \
-        git=2.18.1-r0 \
-        npm=8.14.0-r0 \
-        patch=2.7.6-r2 \
-        python2=2.7.15-r1 \
-        yarn=1.7.0-r0 \
+        git=2.20.1-r0 \
+        npm=10.14.2-r0 \
+        patch=2.7.6-r4 \
+        python2=2.7.15-r3 \
+        yarn=1.12.3-r0\
     \
     && apk add --no-cache \
-        apache2-utils=2.4.38-r3 \
-        certbot=0.25.1-r1 \
-        mariadb-client=10.2.22-r0 \
-        mariadb=10.2.22-r0 \
+        apache2-utils=2.4.38-r2 \
+        certbot=0.30.2-r2 \
+        mariadb-client=10.3.13-r0 \
+        mariadb=10.3.13-r0 \
         nginx-mod-stream=1.14.2-r0 \
         nginx=1.14.2-r0 \
-        nodejs=8.14.0-r0 \
-        openssl=1.0.2r-r0 \
-        dnsmasq=2.79-r3 \
-        libcap=2.25-r1 \
+        nodejs=10.14.2-r0 \
+        openssl=1.1.1b-r1 \
+        dnsmasq=2.80-r3 \
+        libcap=2.26-r0 \
     \
     && yarn global add modclean \
     \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
-        "https://github.com/jc21/nginx-proxy-manager/archive/2.0.9.tar.gz" \
+        "https://github.com/jc21/nginx-proxy-manager/archive/2.0.12.tar.gz" \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \

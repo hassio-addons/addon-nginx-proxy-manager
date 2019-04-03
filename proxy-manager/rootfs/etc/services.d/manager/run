@@ -1,10 +1,8 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # Runs the nginx proxy manager interface
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 declare -a options
 
@@ -13,5 +11,5 @@ options+=("--max_old_space_size=250")
 
 export NODE_ENV=production
 
-cd /opt/nginx-proxy-manager || hass.die "Could not change directory to app"
+cd /opt/nginx-proxy-manager || bashio::exit.nok "Could not change directory to app"
 exec node "${options[@]}" /opt/nginx-proxy-manager/src/backend/index.js

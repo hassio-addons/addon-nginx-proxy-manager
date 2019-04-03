@@ -1,10 +1,8 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # This file applies patches so the add-on becomes compatible
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 # Redirect log output to the Hass.io add-on log
 sed -i 's#/data/logs/error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf

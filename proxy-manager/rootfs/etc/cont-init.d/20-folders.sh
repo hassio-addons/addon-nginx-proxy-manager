@@ -1,12 +1,10 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # This file generates a dummy SSL certificate
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
-if ! hass.directory_exists "/data/nginx"; then
+if ! bashio::fs.directory_exists "/data/nginx"; then
     mkdir -p \
         /data/nginx/dead_host \
         /data/nginx/proxy_host \
@@ -15,26 +13,26 @@ if ! hass.directory_exists "/data/nginx"; then
         /data/nginx/temp
 fi
 
-if ! hass.directory_exists "/data/logs/letsencrypt"; then
+if ! bashio::fs.directory_exists "/data/logs/letsencrypt"; then
     mkdir -p /data/logs/letsencrypt
 fi
 
-if ! hass.directory_exists "/data/letsencrypt-acme-challenge"; then
+if ! bashio::fs.directory_exists "/data/letsencrypt-acme-challenge"; then
     mkdir /data/letsencrypt-acme-challenge
     mkdir /data/letsencrypt-workdir
 fi
 
-if ! hass.directory_exists "/data/mysql"; then
+if ! bashio::fs.directory_exists "/data/mysql"; then
     mkdir /data/mysql
     chown mysql:mysql /data/mysql
 fi
 
-if ! hass.directory_exists "/data/manager"; then
+if ! bashio::fs.directory_exists "/data/manager"; then
     mkdir /data/manager
     cp /defaults/production.json /data/manager/production.json
 fi
 
-if ! hass.directory_exists "/ssl/nginxproxymanager"; then
+if ! bashio::fs.directory_exists "/ssl/nginxproxymanager"; then
     mkdir -p \
         /ssl/nginxproxymanager
 fi
