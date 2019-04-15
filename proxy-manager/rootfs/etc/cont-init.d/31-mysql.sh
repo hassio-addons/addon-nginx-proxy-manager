@@ -39,7 +39,8 @@ if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
     echo "GRANT ALL ON \`nginxproxymanager\`.* TO 'nginxproxymanager'@'localhost' ;" | mysql
 
     # Stop the MySQL server
-    if ! kill -s TERM "$pid" || ! wait "$pid"; then
+    childpid=$(pgrep -P "$pid")
+    if ! kill -s TERM "$childpid" || ! wait "$pid"; then
         bashio::exit.nok "Initialization of database failed."
     fi
 fi

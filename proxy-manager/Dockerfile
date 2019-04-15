@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:3.0.1
+ARG BUILD_FROM=hassioaddons/base:3.1.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -17,7 +17,7 @@ RUN \
         yarn=1.12.3-r0\
     \
     && apk add --no-cache \
-        apache2-utils=2.4.38-r2 \
+        apache2-utils=2.4.39-r0 \
         certbot=0.30.2-r2 \
         mariadb-client=10.3.13-r0 \
         mariadb=10.3.13-r0 \
