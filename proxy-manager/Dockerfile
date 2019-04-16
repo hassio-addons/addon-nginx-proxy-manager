@@ -23,10 +23,10 @@ RUN \
         mariadb=10.3.13-r0 \
         nginx-mod-stream=1.14.2-r0 \
         nginx=1.14.2-r0 \
-        dnsmasq=2.79-r3 \
         libcap=2.25-r1 \
         nodejs=10.14.2-r0 \
         openssl=1.1.1b-r1 \
+        dnsmasq=2.80-r3 \
     \
     && yarn global add modclean \
     \
