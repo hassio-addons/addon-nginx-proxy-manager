@@ -35,8 +35,5 @@
   "options": {},
   "schema": {
     "log_level": "match(^(trace|debug|info|notice|warning|error|fatal)$)?"
-  },
-  "environment": {
-    "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
   }
 }
