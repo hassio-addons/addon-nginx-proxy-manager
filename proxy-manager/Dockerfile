@@ -17,10 +17,10 @@ RUN \
         yarn=1.12.3-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.38-r3 \
         certbot=0.25.1-r1 \
         mariadb-client=10.2.22-r0 \
         mariadb=10.2.22-r0 \
+        apache2-utils=2.4.39-r0 \
         nginx-mod-stream=1.14.2-r0 \
         nginx=1.14.2-r0 \
         nodejs=8.14.0-r0 \
