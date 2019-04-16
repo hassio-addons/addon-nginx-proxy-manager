@@ -18,6 +18,11 @@
     "81": 81,
     "443": 443
   },
+  "ports_description": {
+    "80": "HTTP Entrance port",
+    "81": "Proxy management web interface",
+    "443": "HTTPS/SSL Entrance port"
+  },
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
