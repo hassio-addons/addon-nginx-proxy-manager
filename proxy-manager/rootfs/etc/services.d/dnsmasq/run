@@ -1,15 +1,11 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # Runs the DNSMasq
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
-
 declare -a options
 
-# Allow dnsmasq to bind on ports < 1024
-#setcap CAP_NET_BIND_SERVICE=+eip "$(command -v dnsmasq)"
+bashio::log.info "Starting DNSMasq..."
 
 options+=(--keep-in-foreground)
 

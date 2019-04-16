@@ -1,15 +1,19 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # This file init the MySQL database
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 # Initialize the database data directory.
-if ! hass.directory_exists "/data/mysql/mysql"; then
+if ! bashio::fs.directory_exists "/data/mysql"; then
+    mkdir /data/mysql
+    chown mysql:mysql /data/mysql
+fi
 
-    hass.log.info "Initializing database..."
+if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
+
+    bashio::log.info "Initializing database..."
+
     s6-setuidgid mysql mysql_install_db --datadir=/data/mysql
 
     # Start MySQL.
@@ -17,7 +21,7 @@ if ! hass.directory_exists "/data/mysql/mysql"; then
     rc="$?"
     pid="$!"
     if [ "$rc" -ne 0 ]; then
-        hass.die "Failed to start the database."
+        bashio::exit.nok "Failed to start the database."
     fi
 
     # Wait until it is ready.
@@ -40,6 +44,6 @@ if ! hass.directory_exists "/data/mysql/mysql"; then
 
     # Stop the MySQL server
     if ! kill -s TERM "$pid" || ! wait "$pid"; then
-        hass.die "Initialization of database failed."
+        bashio::exit.nok "Initialization of database failed."
     fi
 fi

@@ -1,12 +1,11 @@
-#!/usr/bin/with-contenv bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Community Hass.io Add-ons: Nginx Proxy Manager
 # Runs the MySQL database server
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
-
 declare -a options
+
+bashio::log.info "Starting MySQL database server..."
 
 options+=(--datadir /data/mysql)
 options+=(--tmpdir /tmp/)
