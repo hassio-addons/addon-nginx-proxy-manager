@@ -5,7 +5,8 @@
 # ==============================================================================
 declare -a options
 
-# TODO Wait for MySQL
+# Wait for MySQL to become available
+bashio::net.wait_for 3306
 
 bashio::log.info "Starting the Manager..."
 

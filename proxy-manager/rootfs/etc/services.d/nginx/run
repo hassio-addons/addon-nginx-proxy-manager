@@ -4,8 +4,6 @@
 # Runs the nginx proxy manager interface
 # ==============================================================================
 
-# TODO Wait for manager?
-
 bashio::log.info "Starting NGinx..."
 
 # Create required folders
