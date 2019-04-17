@@ -189,7 +189,7 @@ SOFTWARE.
 [discord]: https://discord.me/hassioaddons
 [dockerhub]: https://hub.docker.com/r/hassioaddons/nginxproxymanager
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/?u=frenck
+[forum]: https://community.home-assistant.io/t/community-hass-io-add-on-nginx-proxy-manager/111830?u=frenck
 [frenck]: https://github.com/frenck
 [gitlabci-shield]: https://gitlab.com/hassio-addons/addon-nginx-proxy-manager/badges/master/pipeline.svg
 [gitlabci]: https://gitlab.com/hassio-addons/addon-nginx-proxy-manager/pipelines
