@@ -26,7 +26,8 @@ Manage Nginx proxy hosts with a simple, powerful interface.
 ## About
 
 This add-on enables you to easily forward incoming connections to anywhere,
-including free SSL, without having to know too much about Nginx or Letsencrypt.
+including free SSL, without having to know too much about Nginx
+or Let’s Encrypt.
 
 Forward your domain to your Home Assistant, Hass.io add-ons, or websites running
 at home or anywhere else, straight from a simple, powerful interface.
@@ -93,8 +94,6 @@ you are troubleshooting.
   which is removed from this add-on. It makes no sense from a
   Hass.io / Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
-- Creating proxies from subfolder (e.g., `host.tld/node-red`) is not supported
-  yet. This feature is expected in the near future.
 
 ## Changelog & Releases
 
