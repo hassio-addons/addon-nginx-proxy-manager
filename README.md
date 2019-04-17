@@ -23,6 +23,8 @@
 
 Manage Nginx proxy hosts with a simple, powerful interface.
 
+![The Nginx Proxy Manager Hass.io add-on](images/screenshot.gif)
+
 ## About
 
 This add-on enables you to easily forward incoming connections to anywhere,
