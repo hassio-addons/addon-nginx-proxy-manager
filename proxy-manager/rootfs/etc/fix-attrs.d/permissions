@@ -1,2 +1,4 @@
 /data/mysql true mysql 0644 0755
 /run/mysqld true mysql 0644 0755
+/run/nginx false root 0644 0755
+/tmp false root 0644 0777
