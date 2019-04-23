@@ -97,7 +97,7 @@ you are troubleshooting.
   Hass.io / Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
 - The addon will only request certificates via an HTTP challenge, so if you have
-  any SSL termination/CDN infront of your application (such as Cloudflare it
+  any SSL termination/CDN infront of your application (such as Cloudflare) it
   will fail.  DNS Challenges are not supported.
 
 ## Changelog & Releases
