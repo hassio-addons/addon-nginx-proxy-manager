@@ -15,6 +15,10 @@ options+=("--max_old_space_size=250")
 
 export NODE_ENV=production
 
+if bashio::debug; then
+  export DEBUG=1
+fi
+
 cd /opt/nginx-proxy-manager \
     || bashio::exit.nok "Could not change directory to app"
 
