@@ -51,6 +51,12 @@ if ! bashio::fs.directory_exists "/ssl/nginxproxymanager"; then
         /ssl/nginxproxymanager
 fi
 
+if ! bashio::fs.directory_exists "/data/nginx/default_host"; then
+    mkdir -p \
+        /data/nginx/default_host \
+        /data/nginx/default_www
+fi
+
 # Creates basic temporary files directory structure
 # Needed for caching
 mkdir -p \
