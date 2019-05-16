@@ -21,8 +21,8 @@ RUN \
         certbot=0.30.2-r2 \
         mariadb-client=10.3.13-r1 \
         mariadb=10.3.13-r1 \
-        nginx-mod-stream=1.14.2-r0 \
-        nginx=1.14.2-r0 \
+        nginx-mod-stream=1.14.2-r1 \
+        nginx=1.14.2-r1 \
         nodejs=10.14.2-r0 \
         openssl=1.1.1b-r1 \
         dnsmasq=2.80-r3 \
