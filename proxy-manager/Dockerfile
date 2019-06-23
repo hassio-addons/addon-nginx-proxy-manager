@@ -14,7 +14,7 @@ RUN \
         npm=10.16.0-r0 \
         patch=2.7.6-r4 \
         python2=2.7.16-r1 \
-        yarn=1.12.3-r0 \
+        yarn=1.16.0-r0 \
     \
     && apk add --no-cache \
         apache2-utils=2.4.39-r0 \
