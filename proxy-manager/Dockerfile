@@ -25,7 +25,6 @@ RUN \
         nginx=1.16.0-r2 \
         nodejs=10.16.0-r0 \
         openssl=1.1.1c-r0 \
-        dnsmasq=2.80-r3 \
         libcap=2.27-r0 \
     \
     && yarn global add modclean \
