@@ -12,7 +12,7 @@ RUN \
         build-base=0.5-r1 \
         git=2.22.0-r0 \
         npm=10.16.0-r0 \
-        patch=2.7.6-r4 \
+        patch=2.7.6-r6 \
         python2=2.7.16-r1 \
         yarn=1.16.0-r0 \
     \
