@@ -7,4 +7,4 @@ declare hassio_dns
 
 hassio_dns=$(bashio::dns.host)
 sed -i "s/%%hassio_dns%%/${hassio_dns}/g" \
-    /etc/nginx/conf.d/includes/resolvers.conf
+    /etc/nginx/conf.d/include/resolvers.conf
