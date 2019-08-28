@@ -5,6 +5,8 @@
   "description": "Manage Nginx proxy hosts with a simple, powerful interface",
   "url": "https://github.com/hassio-addons/addon-nginx-proxy-manager",
   "webui": "http://[HOST]:[PORT:81]",
+  "ingress": true,
+  "ingress_port": 81,
   "startup": "application",
   "arch": [
     "aarch64",
