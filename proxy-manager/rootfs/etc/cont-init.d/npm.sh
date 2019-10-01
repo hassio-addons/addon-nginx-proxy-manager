@@ -11,7 +11,11 @@ sed -i 's#/data/logs/dead_host-{{ id }}.log#/proc/1/fd/1#g' \
 sed -i 's#/data/logs/redirection_host-{{ id }}.log#/proc/1/fd/1#g' \
     /opt/nginx-proxy-manager/src/backend/templates/redirection_host.conf
 sed -i 's#/data/logs/proxy_host-{{ id }}.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/src/backend/templates/proxy_host.conf \
+    /opt/nginx-proxy-manager/src/backend/templates/proxy_host.conf
+sed -i 's#/data/logs/manager.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
+sed -i 's#/data/logs/default.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
+sed -i 's#/data/logs/letsencrypt-requests.log#/proc/1/fd/1#g' \
+    /opt/nginx-proxy-manager/src/backend/templates/letsencrypt-request.conf
 
 # Store cache in a temporary folder
 sed -i 's#/var/lib/nginx/cache/public#/tmp/nginx/cache/public#g' \
@@ -69,9 +73,18 @@ mkdir -p \
 ln -s /tmp/nginx /var/tmp/nginx
 ln -s /data/manager /opt/nginx-proxy-manager/config
 
-ln -sf /proc/1/fd/1 /data/logs/default.log
-ln -sf /proc/1/fd/1 /data/logs/manager.log
-ln -sf /proc/1/fd/1 /data/logs/letsencrypt-requests.log
+#Tidy unneeded symlinks
+if [ -L "/data/logs/default.log" ]; then
+    unlink /data/logs/default.log
+fi
+
+if  [ -L "/data/logs/manager.log" ]; then
+    unlink /data/logs/manager.log
+fi
+
+if [ -L "/data/logs/letsencrypt-requests.log" ]; then
+    unlink /data/logs/letsencrypt-requests.log
+fi
 
 ln -sf /ssl/nginxproxymanager /etc/letsencrypt
 
