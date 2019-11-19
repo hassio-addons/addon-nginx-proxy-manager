@@ -32,7 +32,7 @@ including free SSL, without having to know too much about Nginx
 or Let’s Encrypt.
 
 Forward your domain to your Home Assistant, Hass.io add-ons, or websites running
-at home or anywhere else, straight from a simple, powerful interface.
+at home or anywhere else, straight from a simple, powerful interface. You can also secure your Home Assistant instance following [these](https://www.home-assistant.io/integrations/http/) instructions. The addon will automatically forward the correct IP address.
 
 Want to protect the website with a username/password? Well, it can do that too!
 Enable authentication and create a list of usernames/password that can access
