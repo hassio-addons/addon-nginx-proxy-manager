@@ -74,15 +74,15 @@ ln -s /tmp/nginx /var/tmp/nginx
 ln -s /data/manager /opt/nginx-proxy-manager/config
 
 #Tidy unneeded symlinks
-if [ -L "/data/logs/default.log" ]; then
+if bashio::fs.file_exists "/data/logs/default.log"; then
     unlink /data/logs/default.log
 fi
 
-if  [ -L "/data/logs/manager.log" ]; then
+if  bashio::fs.file_exists "/data/logs/manager.log"; then
     unlink /data/logs/manager.log
 fi
 
-if [ -L "/data/logs/letsencrypt-requests.log" ]; then
+if bashio::fs.file_exists "/data/logs/letsencrypt-requests.log"; then
     unlink /data/logs/letsencrypt-requests.log
 fi
 
@@ -95,7 +95,7 @@ touch /var/lib/nginx/logs/error.log
 chmod 777 /var/lib/nginx/logs/error.log
 
 # This file generates a dummy SSL certificate
-if [[ ! -f /data/nginx/dummycert.pem ]] || [[ ! -f /data/nginx/dummykey.pem ]]
+if ! bashio::fs.directory_exists "/data/nginx/dummycert.pem" && ! bashio::fs.file_exists "/data/nginx/dummykey.pem";
 then
   bashio::log.info "Generating dummy SSL certificate"
   openssl req \
