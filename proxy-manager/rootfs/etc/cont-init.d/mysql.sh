@@ -35,6 +35,34 @@ if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
     # Secure the installation.
     printf '\nn\n\n\n\n\n' | /usr/bin/mysql_secure_installation
 
+    # Check data integrity and fix corruptions.
+    mysqlcheck \
+        --no-defaults \
+        --check-upgrade \
+        --auto-repair \
+        --databases mysql \
+        --skip-write-binlog \
+        > /dev/null \
+        || true
+
+    mysqlcheck \
+        --no-defaults \
+        --all-databases \
+        --fix-db-names \
+        --fix-table-names \
+        --skip-write-binlog \
+        > /dev/null \
+        || true
+
+    mysqlcheck \
+        --no-defaults \
+        --check-upgrade \
+        --all-databases \
+        --auto-repair \
+        --skip-write-binlog \
+        > /dev/null \
+        || true
+
     # Create the database.
     echo "CREATE DATABASE IF NOT EXISTS \`nginxproxymanager\` ;" | mysql
 
