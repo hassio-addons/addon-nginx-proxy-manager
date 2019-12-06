@@ -46,17 +46,14 @@ Nginx proxy manager by providing additional Nginx directives.
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Hass.io add-on.
 
-1. [Add our Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install the "Nginx Proxy Manager" add-on.
+1. Search for the "Nginx Proxy Manager" add-on in the Hass.io add-on store
+   and install it.
 1. Start the "Nginx Proxy Manager" add-on
 1. Check the logs of the "Nginx Proxy Manager" add-on to see if everything went well.
 1. Click the "OPEN WEB UI" button and login using:
    `admin@example.com` / `changeme`
 1. Forward port `80` and `443` from your router to your Hass.io machine.
 1. Enjoy the add-on!
-
-**NOTE**: Do not add this repository to Hass.io, please use:
-`https://github.com/hassio-addons/repository`.
 
 ## Configuration
 
