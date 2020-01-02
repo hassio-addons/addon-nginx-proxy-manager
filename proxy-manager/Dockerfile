@@ -24,7 +24,7 @@ RUN \
         nginx-mod-stream=1.16.1-r4 \
         nginx=1.16.1-r4 \
         nodejs=12.14.0-r0 \
-        openssl=1.1.1d-r0 \
+        openssl=1.1.1d-r3 \
         libcap=2.27-r0 \
     \
     && yarn global add modclean \
