@@ -151,7 +151,7 @@ our [GitHub Repository][repository].
 
 MIT License
 
-Copyright (c) 2019 Franck Nijhof
+Copyright (c) 2019-2020 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -195,7 +195,7 @@ SOFTWARE.
 [issue]: https://github.com/hassio-addons/addon-nginx-proxy-manager/issues
 [keepchangelog]: http://keepachangelog.com/en/1.0.0/
 [license-shield]: https://img.shields.io/github/license/hassio-addons/addon-nginx-proxy-manager.svg
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2019.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2020.svg
 [microbadger]: https://microbadger.com/images/hassioaddons/nginxproxymanager
 [patreon-shield]: https://www.frenck.nl/images/patreon.png
 [patreon]: https://www.patreon.com/
