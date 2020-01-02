@@ -19,8 +19,8 @@ RUN \
     && apk add --no-cache \
         apache2-utils=2.4.41-r0 \
         certbot=1.0.0-r0 \
-        mariadb-client=10.3.20-r0 \
-        mariadb=10.3.20-r0 \
+        mariadb-client=10.4.10-r0 \
+        mariadb=10.4.10-r0 \
         nginx-mod-stream=1.16.1-r4 \
         nginx=1.16.1-r4 \
         nodejs=12.14.0-r0 \
