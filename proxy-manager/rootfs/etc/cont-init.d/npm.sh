@@ -71,6 +71,7 @@ mkdir -p \
     /tmp/nginx/cache/private
 
 ln -s /tmp/nginx /var/tmp/nginx
+ln -s /tmp/nginx /var/lib/nginx/tmp
 ln -s /data/manager /opt/nginx-proxy-manager/config
 
 #Tidy unneeded symlinks
