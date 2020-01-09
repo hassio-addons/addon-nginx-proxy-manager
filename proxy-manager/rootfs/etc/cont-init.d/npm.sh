@@ -68,7 +68,8 @@ mkdir -p \
     /tmp/nginx/proxy \
     /tmp/nginx/body \
     /tmp/nginx/cache/public \
-    /tmp/nginx/cache/private
+    /tmp/nginx/cache/private \
+    /var/lib/nginx/
 
 ln -s /tmp/nginx /var/tmp/nginx
 ln -s /tmp/nginx /var/lib/nginx/tmp
