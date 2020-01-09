@@ -33,7 +33,18 @@ if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
     done
 
     # Secure the installation.
-    printf '\nn\n\n\n\n\n' | /usr/bin/mysql_secure_installation
+    mysql <<-EOSQL
+        SET @@SESSION.SQL_LOG_BIN=0;
+
+        DELETE FROM
+            mysql.user
+        WHERE
+            user NOT IN ('mysql.sys', 'mysqlxsys', 'root', 'mysql')
+                OR host NOT IN ('localhost');
+
+        DROP DATABASE IF EXISTS test;
+        FLUSH PRIVILEGES;
+EOSQL
 
     # Check data integrity and fix corruptions.
     mysqlcheck \
