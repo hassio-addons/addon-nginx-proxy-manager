@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Community Hass.io Add-ons: AdGuard Home
-# Configures NGINX for use with the AdGuard Home server
+# Home Assistant Community Add-on: NGINX Proxy Manager
+# Configures NGINX for use with the NGINX Proxy Manager
 # ==============================================================================
 declare hassio_dns
 

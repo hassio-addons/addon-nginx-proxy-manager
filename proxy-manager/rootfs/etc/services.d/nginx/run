@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Community Hass.io Add-ons: Nginx Proxy Manager
+# Home Assistant Community Add-on: Nginx Proxy Manager
 # Runs the nginx proxy manager interface
 # ==============================================================================
 
