@@ -90,6 +90,12 @@ fi
 
 ln -sf /ssl/nginxproxymanager /etc/letsencrypt
 
+if bashio::fs.directory_exists "/share/npm"; then
+    bashio::log.info "Adding link to /share/npm for custom config files"
+    rm -f /data/nginx/custom || true
+    ln -sf /share/npm /data/nginx/custom
+fi
+
 # NGinx needs this file to be able to start.
 # It will not continously log into it.
 mkdir -p /var/lib/nginx/logs

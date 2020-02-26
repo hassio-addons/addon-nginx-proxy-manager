@@ -20,7 +20,7 @@
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
-  "map": ["ssl:rw"],
+  "map": ["ssl:rw","share:ro"],
   "options": {},
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)?"
