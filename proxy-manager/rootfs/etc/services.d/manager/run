@@ -22,4 +22,4 @@ fi
 cd /opt/nginx-proxy-manager \
     || bashio::exit.nok "Could not change directory to app"
 
-exec node "${options[@]}" /opt/nginx-proxy-manager/src/backend/index.js
+exec node "${options[@]}" /opt/nginx-proxy-manager/index.js
