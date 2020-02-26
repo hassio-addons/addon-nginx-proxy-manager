@@ -30,34 +30,46 @@ RUN \
     && yarn global add modclean \
     \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
-        "https://github.com/jc21/nginx-proxy-manager/archive/2.0.14.tar.gz" \
+        "https://github.com/jc21/nginx-proxy-manager/archive/v2.1.1.tar.gz" \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \
         --strip 1 -C /app \
     \
     && sed -i "s#canShow('streams')#false#g" \
-        /app/src/frontend/js/app/ui/menu/main.ejs \
+        /app/frontend/js/app/ui/menu/main.ejs \
     && sed -i "s#canShow('streams')#false#g" \
-        /app/src/frontend/js/app/dashboard/main.ejs \
+        /app/frontend/js/app/dashboard/main.ejs \
     && sed -i "s#, 'streams',#,#g" \
-        /app/src/frontend/js/app/user/permissions.ejs \
+        /app/frontend/js/app/user/permissions.ejs \
     \
-    && cd /app \
+    && cd /app/frontend \
     && yarn install \
-    && npm run-script build \
+    && yarn build \
     && rm -rf node_modules \
-    && yarn install --production \
     \
-    && mkdir -p /opt/nginx-proxy-manager/src \
-    && cp -r /app/dist /opt/nginx-proxy-manager/ \
-    && cp -r /app/knexfile.js /opt/nginx-proxy-manager/ \
-    && cp -r /app/node_modules /opt/nginx-proxy-manager/ \
-    && cp -r /app/package.json /opt/nginx-proxy-manager/ \
-    && cp -r /app/src/backend /opt/nginx-proxy-manager/src/ \
+    && mkdir -p /opt/nginx-proxy-manager/frontend \
+    && cp -r /app/frontend/dist/. /opt/nginx-proxy-manager/frontend/ \
+    \
+    && cd /app/backend \
+    && yarn install \
+    && yarn eslint . \
+    && rm -rf node_modules \
+    && cp -r /app/backend/. /opt/nginx-proxy-manager/ \
+    \
+    && cd /opt/nginx-proxy-manager \
+    && yarn install \
+    && rm -rf /etc/services.d/frontend \
+    && rm -rf /opt/nginx-proxy-manager/config \
     \
     && rm -f -r /etc/nginx \
-    && cp -r /app/rootfs/etc/nginx /etc/nginx \
+    && cp -r /app/docker/rootfs/etc/nginx /etc/nginx \
+    && rm -f /etc/nginx/conf.d/dev.conf \ 
+    \
+    && sed -i "s#root /app/frontend;#root /opt/nginx-proxy-manager/frontend;#" \
+        /etc/nginx/conf.d/production.conf \
+    && sed -i "s#table.string('id').notNull().primary();#table.string('id', 32).notNull().primary();#" \
+        /opt/nginx-proxy-manager/migrations/20190227065017_settings.js \
     \
     && mkdir -p \
         /run/mysqld \
