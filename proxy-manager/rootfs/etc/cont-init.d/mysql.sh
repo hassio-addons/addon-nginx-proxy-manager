@@ -2,7 +2,7 @@
 # ==============================================================================
 # Home Assistant Community Add-on: Nginx Proxy Manager
 # This file init the MySQL database
-# ==============-===============================================================
+# ==============================================================================
 declare host
 declare password
 declare port
@@ -94,6 +94,5 @@ if bashio::fs.directory_exists "/data/mysql"; then
         nginxproxymanager < "${backup}"
 
     # Delete local MySQL data folder
-    # rm -f -r /data/mysql
-    mv /data/mysql /data/mysql_migrated
+    rm -f -r /data/mysql
 fi
