@@ -3,25 +3,45 @@
 # Home Assistant Community Add-on: Nginx Proxy Manager
 # This file init the MySQL database
 # ==============================================================================
+declare host
+declare password
+declare port
+declare username
+declare backup
 
-# Initialize the database data directory.
-if ! bashio::fs.directory_exists "/data/mysql"; then
-    mkdir /data/mysql
-    chown mysql:mysql /data/mysql
+# Require MySQL service to be available
+if ! bashio::services.available "mysql"; then
+    bashio::log.error \
+        "This add-on now requires the MariaDB core add-on 2.0 or newer!"
+    bashio::exit.nok \
+        "Make sure the MariaDB add-on is installed and running"
 fi
 
-if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
+host=$(bashio::services "mysql" "host")
+password=$(bashio::services "mysql" "password")
+port=$(bashio::services "mysql" "port")
+username=$(bashio::services "mysql" "username")
 
-    bashio::log.info "Initializing database..."
+# Create database if not exists
+echo "CREATE DATABASE IF NOT EXISTS nginxproxymanager;" \
+    | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
 
-    s6-setuidgid mysql mysql_install_db --datadir=/data/mysql
+# Check if older MySQL folder exists
+if bashio::fs.directory_exists "/data/mysql"; then
+    bashio::log.info "Found previous MySQL database, starting migration..."
+
+    backup="/backup/nginx-proxy-manager-$(date +%F).sql"
+    bashio::log.info "A backup of your database will be stored in: ${backup}"
+
+    # Start internal MySQL server temperorary
+    bashio::log.info "Initializing previous database..."
 
     # Start MySQL.
     s6-setuidgid mysql /usr/bin/mysqld --datadir /data/mysql --tmpdir /tmp/ &
     rc="$?"
     pid="$!"
     if [ "$rc" -ne 0 ]; then
-        bashio::exit.nok "Failed to start the database."
+        bashio::exit.nok "Failed to start the previous database."
     fi
 
     # Wait until it is ready.
@@ -31,20 +51,6 @@ if ! bashio::fs.directory_exists "/data/mysql/mysql"; then
         fi
         sleep 1
     done
-
-    # Secure the installation.
-    mysql <<-EOSQL
-        SET @@SESSION.SQL_LOG_BIN=0;
-
-        DELETE FROM
-            mysql.user
-        WHERE
-            user NOT IN ('mysql.sys', 'mysqlxsys', 'root', 'mysql')
-                OR host NOT IN ('localhost');
-
-        DROP DATABASE IF EXISTS test;
-        FLUSH PRIVILEGES;
-EOSQL
 
     # Check data integrity and fix corruptions.
     mysqlcheck \
@@ -74,15 +80,19 @@ EOSQL
         > /dev/null \
         || true
 
-    # Create the database.
-    echo "CREATE DATABASE IF NOT EXISTS \`nginxproxymanager\` ;" | mysql
+    # Dump current database into backups folder
+    bashio::log.info "Backing up previous database..."
 
-    # Create the user.
-    echo "CREATE USER 'nginxproxymanager'@'%' IDENTIFIED BY 'nginxproxymanager' ;" | mysql
-    echo "GRANT ALL ON \`nginxproxymanager\`.* TO 'nginxproxymanager'@'%' ;" | mysql
+    mysqldump --single-transaction --quick --no-create-db --lock-tables nginxproxymanager \
+        > "${backup}"
 
     # Stop the MySQL server
-    if ! kill -s TERM "$pid" || ! wait "$pid"; then
-        bashio::exit.nok "Initialization of database failed."
-    fi
+    kill -s TERM "$pid" || true
+
+    # Load up database to the core mariadb
+    mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}" \
+        nginxproxymanager < "${backup}"
+
+    # Delete local MySQL data folder
+    rm -f -r /data/mysql
 fi
