@@ -53,7 +53,6 @@ RUN \
     \
     && cd /app/backend \
     && yarn install \
-    && yarn eslint . \
     && rm -rf node_modules \
     && cp -r /app/backend/. /opt/nginx-proxy-manager/ \
     \
@@ -64,7 +63,7 @@ RUN \
     \
     && rm -f -r /etc/nginx \
     && cp -r /app/docker/rootfs/etc/nginx /etc/nginx \
-    && rm -f /etc/nginx/conf.d/dev.conf \ 
+    && rm -f /etc/nginx/conf.d/dev.conf \
     \
     && sed -i "s#root /app/frontend;#root /opt/nginx-proxy-manager/frontend;#" \
         /etc/nginx/conf.d/production.conf \
