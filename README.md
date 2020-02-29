@@ -46,6 +46,8 @@ Nginx proxy manager by providing additional Nginx directives.
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
 
+1. Ensure you are running the MariaDB add-on. This add-on is required to use
+   the Nginx Proxy Manager add-on as it uses the database services provided.
 1. Search for the "Nginx Proxy Manager" add-on in the Supervisor add-on store
    and install it.
 1. Start the "Nginx Proxy Manager" add-on
@@ -91,6 +93,10 @@ you are troubleshooting.
   which is removed from this add-on. It makes no sense from a
   Hass.io / Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
+- This add-on stores its database on the MariaDB add-on. This also means that
+  by taking a snapshot of just the Nginx Proxy Manager add-on, will not
+  contain the data from this add-on. Please make sure you backup both
+  the Nginx Proxy Manager and the MariaDB add-ons.
 
 ## Changelog & Releases
 
