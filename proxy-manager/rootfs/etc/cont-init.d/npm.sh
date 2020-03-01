@@ -9,7 +9,7 @@ declare mysql_port
 declare mysql_username
 declare query
 
-# Redirect log output to the Hass.io add-on log
+# Redirect log output to the add-on log
 sed -i 's#/data/logs/error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
 sed -i 's#/data/logs/default.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
 sed -i 's#/data/logs/dead_host-{{ id }}.log#/proc/1/fd/1#g' \

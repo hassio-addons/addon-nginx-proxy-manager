@@ -23,7 +23,7 @@
 
 Manage Nginx proxy hosts with a simple, powerful interface.
 
-![The Nginx Proxy Manager Hass.io add-on](images/screenshot.gif)
+![The Nginx Proxy Manager add-on](images/screenshot.gif)
 
 ## About
 
@@ -31,7 +31,7 @@ This add-on enables you to easily forward incoming connections to anywhere,
 including free SSL, without having to know too much about Nginx
 or Let’s Encrypt.
 
-Forward your domain to your Home Assistant, Hass.io add-ons, or websites running
+Forward your domain to your Home Assistant, add-ons, or websites running
 at home or anywhere else, straight from a simple, powerful interface.
 
 Want to protect the website with a username/password? Well, it can do that too!
@@ -54,7 +54,7 @@ comparison to installing any other Home Assistant add-on.
 1. Check the logs of the "Nginx Proxy Manager" add-on to see if everything went well.
 1. Click the "OPEN WEB UI" button and login using:
    `admin@example.com` / `changeme`
-1. Forward port `80` and `443` from your router to your Hass.io machine.
+1. Forward port `80` and `443` from your router to your Home Assistant machine.
 1. Enjoy the add-on!
 
 ## Configuration
@@ -91,7 +91,7 @@ you are troubleshooting.
 
 - The original NGinx Proxy Manager has support for forwarding TCP/UDP streams,
   which is removed from this add-on. It makes no sense from a
-  Hass.io / Home Assistant / Home perspective and, by removing it, it also
+  Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
 - This add-on stores its database on the MariaDB add-on. This also means that
   by taking a snapshot of just the Nginx Proxy Manager add-on, will not

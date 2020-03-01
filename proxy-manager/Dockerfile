@@ -126,4 +126,4 @@ LABEL \
     org.label-schema.usage="https://github.com/hassio-addons/addon-nginx-proxy-manager/tree/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
     org.label-schema.vcs-url="https://github.com/hassio-addons/addon-nginx-proxy-manager" \
-    org.label-schema.vendor="Community Hass.io Add-ons"
+    org.label-schema.vendor="Home Assistant Community Add-ons"
