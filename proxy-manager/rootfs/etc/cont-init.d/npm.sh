@@ -67,6 +67,11 @@ if ! bashio::fs.directory_exists "/data/nginx/default_host"; then
         /data/nginx/default_www
 fi
 
+# Check if IPv6 is disabled
+if bashio::config.true 'disable_ipv6'; then
+    export DISABLE_IPV6='true'
+fi
+
 # Creates basic temporary files directory structure
 # Needed for caching
 mkdir -p \

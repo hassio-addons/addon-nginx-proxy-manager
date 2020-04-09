@@ -22,8 +22,11 @@
   "hassio_api": true,
   "hassio_role": "default",
   "map": ["ssl:rw", "backup:rw"],
-  "options": {},
+  "options": {
+    "disable_ipv6": true
+  },
   "schema": {
+    "disable_ipv6": "bool",
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)?"
   }
 }
