@@ -6,6 +6,7 @@
   "url": "https://github.com/hassio-addons/addon-nginx-proxy-manager",
   "webui": "http://[HOST]:[PORT:81]",
   "startup": "application",
+  "init": false,
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "services": ["mysql:need"],
   "ports": {
