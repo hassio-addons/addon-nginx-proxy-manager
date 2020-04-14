@@ -16,6 +16,9 @@ if bashio::debug; then
   export DEBUG=1
 fi
 
+# IPv6 is currently not support yet on a Supervisor enabled system.
+export DISABLE_IPV6="true"
+
 cd /opt/nginx-proxy-manager \
     || bashio::exit.nok "Could not change directory to app"
 
