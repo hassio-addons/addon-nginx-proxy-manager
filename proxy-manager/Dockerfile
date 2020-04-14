@@ -17,7 +17,7 @@ RUN \
         yarn=1.19.2-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.41-r0 \
+        apache2-utils=2.4.43-r0 \
         certbot=1.0.0-r0 \
         mariadb-client=10.4.12-r0 \
         mariadb=10.4.12-r0 \
