@@ -13,7 +13,7 @@ RUN \
         git=2.24.3-r0 \
         npm=12.15.0-r1 \
         patch=2.7.6-r6 \
-        python2=2.7.16-r3 \
+        python2=2.7.18-r0 \
         yarn=1.19.2-r0 \
     \
     && apk add --no-cache \
