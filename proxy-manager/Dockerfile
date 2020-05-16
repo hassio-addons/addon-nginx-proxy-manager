@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r1 \
-        git=2.24.2-r0 \
+        git=2.24.3-r0 \
         npm=12.15.0-r1 \
         patch=2.7.6-r6 \
         python2=2.7.16-r3 \
