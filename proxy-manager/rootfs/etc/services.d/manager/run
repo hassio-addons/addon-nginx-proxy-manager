@@ -16,7 +16,7 @@ if bashio::debug; then
   export DEBUG=1
 fi
 
-# IPv6 is currently not support yet on a Supervisor enabled system.
+# IPv6 is currently not supported yet on a Supervisor enabled system.
 export DISABLE_IPV6="true"
 
 cd /opt/nginx-proxy-manager \
