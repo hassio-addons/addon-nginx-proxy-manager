@@ -11,7 +11,7 @@ RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
         git=2.26.2-r0 \
-        npm=12.15.0-r1 \
+        npm=12.17.0-r0 \
         patch=2.7.6-r6 \
         python2=2.7.18-r0 \
         yarn=1.19.2-r0 \
@@ -23,7 +23,7 @@ RUN \
         mariadb=10.4.13-r0 \
         nginx-mod-stream=1.16.1-r6 \
         nginx=1.16.1-r6 \
-        nodejs=12.15.0-r1 \
+        nodejs=12.17.0-r0 \
         openssl=1.1.1g-r0 \
         libcap=2.27-r0 \
     \
