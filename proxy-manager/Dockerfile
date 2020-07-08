@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r1 \
+        build-base=0.5-r2 \
         git=2.24.3-r0 \
         npm=12.15.0-r1 \
         patch=2.7.6-r6 \
