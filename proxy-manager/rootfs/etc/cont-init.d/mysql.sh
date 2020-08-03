@@ -24,10 +24,15 @@ username=$(bashio::services "mysql" "username")
 
 #Drop database based on config flag
 if bashio::config.true 'reset_database'; then
-    bashio::log.warning 'Recreating database, please ensure to edit the'
-    bashio::log.warning 'reset_database configuration flag before restarting'
+    bashio::log.warning 'Recreating database'
     echo "DROP DATABASE IF EXISTS nginxproxymanager;" \
     | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+    
+    #Reset addon options to null
+    curl -s -H 'X-Supervisor-Token: '"$SUPERVISOR_TOKEN"'' \
+        -H 'Content-Type: application/json'  \
+            http://supervisor/addons/self/options \
+	    --data-binary '{"options": {}}'
 fi
 
 # Create database if not exists
