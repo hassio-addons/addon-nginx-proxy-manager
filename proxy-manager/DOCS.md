@@ -65,8 +65,8 @@ you are troubleshooting.
 By setting to `true` provides the option to delete and recreate the database. As
 the data is held within the MariaDB addon, it is not removed on an uninstall.
 
-**Note**: _Do not leave this set to `true` for more than one restart, either
-remove or set to false once the database has been reconfigured._
+**Note**: _Once the database is reset the configuration for the addon will be
+cleared automatically_
 
 ## Known issues and limitations
 
