@@ -11,7 +11,7 @@ RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
         git=2.26.2-r0 \
-        npm=12.17.0-r0 \
+        npm=12.18.3-r0 \
         patch=2.7.6-r6 \
         python2=2.7.18-r0 \
         yarn=1.22.4-r0 \
