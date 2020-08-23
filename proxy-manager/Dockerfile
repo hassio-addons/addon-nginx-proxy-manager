@@ -23,7 +23,7 @@ RUN \
         mariadb=10.4.13-r0 \
         nginx-mod-stream=1.18.0-r0 \
         nginx=1.18.0-r0 \
-        nodejs=12.17.0-r0 \
+        nodejs=12.18.3-r0 \
         openssl=1.1.1g-r0 \
         libcap=2.27-r0 \
     \
