@@ -32,9 +32,10 @@ RUN \
         nodejs=12.18.3-r0 \
         openssl=1.1.1g-r0 \
         py3-pip=20.1.1-r0 \
+        python2=2.7.18-r0 \
         python3=3.8.5-r0 \
     \
-    && pip install --no-cache-dir -r /tmp/requirements.txt \
+    && pip3 install --no-cache-dir -r /tmp/requirements.txt \
     \
     && yarn global add modclean \
     \
