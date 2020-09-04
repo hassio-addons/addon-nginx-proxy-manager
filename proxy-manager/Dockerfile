@@ -5,27 +5,37 @@ FROM ${BUILD_FROM}
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Copy Python requirements file
+COPY requirements.txt /tmp/
+
 # Setup base
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
         git=2.26.2-r0 \
+        libffi-dev=3.3-r2 \
         npm=12.18.3-r0 \
+        openssl-dev=1.1.1g-r0 \
         patch=2.7.6-r6 \
-        python2=2.7.18-r0 \
+        python2-dev=2.7.18-r0 \
         yarn=1.22.4-r0 \
     \
     && apk add --no-cache \
         apache2-utils=2.4.46-r0 \
         certbot=1.4.0-r0 \
+        libcap=2.27-r0 \
         mariadb-client=10.4.13-r0 \
         mariadb=10.4.13-r0 \
         nginx-mod-stream=1.18.0-r0 \
         nginx=1.18.0-r0 \
         nodejs=12.18.3-r0 \
         openssl=1.1.1g-r0 \
-        libcap=2.27-r0 \
+        python2=2.7.18-r0 \
+    \
+    && python -m ensurepip \
+    \
+    && pip install --no-cache-dir -r /tmp/requirements.txt \
     \
     && yarn global add modclean \
     \
