@@ -22,6 +22,16 @@ password=$(bashio::services "mysql" "password")
 port=$(bashio::services "mysql" "port")
 username=$(bashio::services "mysql" "username")
 
+#Drop database based on config flag
+if bashio::config.true 'reset_database'; then
+    bashio::log.warning 'Recreating database'
+    echo "DROP DATABASE IF EXISTS nginxproxymanager;" \
+    | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
+    
+    #Reset addon options to null
+    bashio::api.supervisor POST "/addons/self/options" '{"options": {}}'
+fi
+
 # Create database if not exists
 echo "CREATE DATABASE IF NOT EXISTS nginxproxymanager;" \
     | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"

@@ -25,6 +25,7 @@
   "map": ["ssl:rw", "backup:rw"],
   "options": {},
   "schema": {
-    "log_level": "list(trace|debug|info|notice|warning|error|fatal)?"
+    "log_level": "list(trace|debug|info|notice|warning|error|fatal)?",
+    "reset_database": "bool?"
   }
 }
