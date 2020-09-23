@@ -29,10 +29,7 @@ if bashio::config.true 'reset_database'; then
     | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
     
     #Reset addon options to null
-    curl -s -H 'X-Supervisor-Token: '"$SUPERVISOR_TOKEN"'' \
-        -H 'Content-Type: application/json'  \
-            http://supervisor/addons/self/options \
-	    --data-binary '{"options": {}}'
+    bashio::api.supervisor POST "/addons/self/options" '{"options": {}}'
 fi
 
 # Create database if not exists
