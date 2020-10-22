@@ -27,8 +27,8 @@ RUN \
         libcap=2.27-r0 \
         mariadb-client=10.4.15-r0 \
         mariadb=10.4.15-r0 \
-        nginx-mod-stream=1.18.0-r0 \
-        nginx=1.18.0-r0 \
+        nginx-mod-stream=1.18.0-r1 \
+        nginx=1.18.0-r1 \
         nodejs=12.18.4-r0 \
         openssl=1.1.1g-r0 \
         py3-pip=20.1.1-r0 \
