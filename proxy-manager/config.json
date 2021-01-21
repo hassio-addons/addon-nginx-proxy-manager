@@ -5,7 +5,6 @@
   "description": "Manage Nginx proxy hosts with a simple, powerful interface",
   "url": "https://github.com/hassio-addons/addon-nginx-proxy-manager",
   "webui": "http://[HOST]:[PORT:81]",
-  "startup": "application",
   "init": false,
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "services": ["mysql:need"],
@@ -19,11 +18,7 @@
     "81": "Proxy management web interface",
     "443": "HTTPS/SSL Entrance port"
   },
-  "boot": "auto",
-  "hassio_api": true,
-  "hassio_role": "default",
   "map": ["ssl:rw", "backup:rw"],
-  "options": {},
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)?",
     "reset_database": "bool?"
