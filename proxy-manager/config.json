@@ -9,14 +9,14 @@
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "services": ["mysql:need"],
   "ports": {
-    "80": 80,
-    "81": 81,
-    "443": 443
+    "80/tcp": 80,
+    "81/tcp": 81,
+    "443/tcp": 443
   },
   "ports_description": {
-    "80": "HTTP Entrance port",
-    "81": "Proxy management web interface",
-    "443": "HTTPS/SSL Entrance port"
+    "80/tcp": "HTTP Entrance port",
+    "81/tcp": "Proxy management web interface",
+    "443/tcp": "HTTPS/SSL Entrance port"
   },
   "map": ["ssl:rw", "backup:rw"],
   "schema": {
