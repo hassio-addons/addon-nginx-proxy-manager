@@ -31,7 +31,7 @@ RUN \
         nginx=1.18.0-r13 \
         nodejs=14.15.4-r0 \
         openssl=1.1.1i-r0 \
-        py3-pip=20.3.3-r0 \
+        py3-pip=20.3.4-r0 \
         python2=2.7.18-r1 \
         python3=3.8.7-r0 \
     \
