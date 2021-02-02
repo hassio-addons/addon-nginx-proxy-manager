@@ -27,9 +27,9 @@ if bashio::config.true 'reset_database'; then
     bashio::log.warning 'Recreating database'
     echo "DROP DATABASE IF EXISTS nginxproxymanager;" \
     | mysql -h "${host}" -P "${port}" -u "${username}" -p"${password}"
-    
-    #Reset addon options to null
-    bashio::api.supervisor POST "/addons/self/options" '{"options": {}}'
+
+    #Remove reset_database option
+    bashio::addon.option 'reset_database'
 fi
 
 # Create database if not exists
