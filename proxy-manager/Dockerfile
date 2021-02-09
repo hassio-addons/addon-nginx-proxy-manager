@@ -13,7 +13,7 @@ COPY requirements.txt /tmp/
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
-        git=2.30.0-r0 \
+        git=2.30.1-r0 \
         libffi-dev=3.3-r2 \
         npm=14.15.4-r0 \
         openssl-dev=1.1.1i-r0 \
