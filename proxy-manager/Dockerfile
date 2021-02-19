@@ -18,7 +18,7 @@ RUN \
         npm=14.15.5-r0 \
         openssl-dev=1.1.1j-r0 \
         patch=2.7.6-r6 \
-        python3-dev=3.8.7-r0 \
+        python3-dev=3.8.7-r1 \
         yarn=1.22.10-r0 \
     \
     && apk add --no-cache \
@@ -33,7 +33,7 @@ RUN \
         openssl=1.1.1j-r0 \
         py3-pip=20.3.4-r0 \
         python2=2.7.18-r1 \
-        python3=3.8.7-r0 \
+        python3=3.8.7-r1 \
     \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt \
     \
