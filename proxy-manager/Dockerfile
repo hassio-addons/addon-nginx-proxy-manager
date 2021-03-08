@@ -15,7 +15,7 @@ RUN \
         build-base=0.5-r2 \
         git=2.30.1-r0 \
         libffi-dev=3.3-r2 \
-        npm=14.15.5-r0 \
+        npm=14.16.0-r0 \
         openssl-dev=1.1.1j-r0 \
         patch=2.7.6-r6 \
         python3-dev=3.8.7-r1 \
@@ -29,7 +29,7 @@ RUN \
         mariadb=10.5.8-r0 \
         nginx-mod-stream=1.18.0-r13 \
         nginx=1.18.0-r13 \
-        nodejs=14.15.5-r0 \
+        nodejs=14.16.0-r0 \
         openssl=1.1.1j-r0 \
         py3-pip=20.3.4-r0 \
         python2=2.7.18-r1 \
