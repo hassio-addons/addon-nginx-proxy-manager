@@ -16,7 +16,7 @@ RUN \
         git=2.30.2-r0 \
         libffi-dev=3.3-r2 \
         npm=14.16.0-r0 \
-        openssl-dev=1.1.1j-r0 \
+        openssl-dev=1.1.1k-r0 \
         patch=2.7.6-r6 \
         python3-dev=3.8.8-r0 \
         yarn=1.22.10-r0 \
