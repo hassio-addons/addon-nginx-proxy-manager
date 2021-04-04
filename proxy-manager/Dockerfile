@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:9.1.5
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:9.1.6
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -16,7 +16,7 @@ RUN \
         git=2.30.2-r0 \
         libffi-dev=3.3-r2 \
         npm=14.16.0-r0 \
-        openssl-dev=1.1.1j-r0 \
+        openssl-dev=1.1.1k-r0 \
         patch=2.7.6-r6 \
         python3-dev=3.8.8-r0 \
         yarn=1.22.10-r0 \
@@ -30,7 +30,7 @@ RUN \
         nginx-mod-stream=1.18.0-r13 \
         nginx=1.18.0-r13 \
         nodejs=14.16.0-r0 \
-        openssl=1.1.1j-r0 \
+        openssl=1.1.1k-r0 \
         py3-pip=20.3.4-r0 \
         python2=2.7.18-r1 \
         python3=3.8.8-r0 \
