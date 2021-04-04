@@ -30,7 +30,7 @@ RUN \
         nginx-mod-stream=1.18.0-r13 \
         nginx=1.18.0-r13 \
         nodejs=14.16.0-r0 \
-        openssl=1.1.1j-r0 \
+        openssl=1.1.1k-r0 \
         py3-pip=20.3.4-r0 \
         python2=2.7.18-r1 \
         python3=3.8.8-r0 \
