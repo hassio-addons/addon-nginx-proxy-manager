@@ -25,8 +25,8 @@ RUN \
         apache2-utils=2.4.46-r3 \
         certbot=1.11.0-r0 \
         libcap=2.46-r0 \
-        mariadb-client=10.5.8-r0 \
-        mariadb=10.5.8-r0 \
+        mariadb-client=10.5.9-r0 \
+        mariadb=10.5.9-r0 \
         nginx-mod-stream=1.18.0-r13 \
         nginx=1.18.0-r13 \
         nodejs=14.16.1-r1 \
