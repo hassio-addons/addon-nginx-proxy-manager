@@ -30,6 +30,20 @@ comparison to installing any other Home Assistant add-on.
 1. Forward port `80` and `443` from your router to your Home Assistant machine.
 1. Enjoy the add-on!
 
+## Home Assistant Configuration
+
+To enable trusted reverse proxies in Home Assistant, you will need to update your `http:` integration.
+In `configuration.yaml`, add the following:
+
+```yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.3
+    - 127.0.0.1
+    - ::1
+```
+
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
