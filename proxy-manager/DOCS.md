@@ -39,7 +39,7 @@ In `configuration.yaml`, add the following:
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.30.33.3
+    - 172.30.33.0/24
     - 127.0.0.1
     - ::1
 ```
