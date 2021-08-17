@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:9.2.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:10.0.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -13,27 +13,27 @@ COPY requirements.txt /tmp/
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
-        git=2.30.2-r0 \
+        git=2.32.0-r0 \
         libffi-dev=3.3-r2 \
-        npm=14.16.1-r1 \
+        npm=7.17.0-r0 \
         openssl-dev=1.1.1k-r0 \
-        patch=2.7.6-r6 \
-        python3-dev=3.8.8-r0 \
+        patch=2.7.6-r7 \
+        python3-dev=3.9.5-r1 \
         yarn=1.22.10-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.46-r3 \
-        certbot=1.11.0-r0 \
-        libcap=2.46-r0 \
-        mariadb-client=10.5.9-r0 \
-        mariadb=10.5.9-r0 \
-        nginx-mod-stream=1.18.0-r13 \
-        nginx=1.18.0-r13 \
-        nodejs=14.16.1-r1 \
+        apache2-utils=2.4.48-r0 \
+        certbot=1.16.0-r0 \
+        libcap=2.50-r0 \
+        mariadb-client=10.5.12-r0 \
+        mariadb=10.5.12-r0 \
+        nginx-mod-stream=1.20.1-r3 \
+        nginx=1.20.1-r3 \
+        nodejs=14.17.4-r0 \
         openssl=1.1.1k-r0 \
-        py3-pip=20.3.4-r0 \
-        python2=2.7.18-r1 \
-        python3=3.8.8-r0 \
+        py3-pip=20.3.4-r1 \
+        python2=2.7.18-r2 \
+        python3=3.9.5-r1 \
     \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt \
     \
