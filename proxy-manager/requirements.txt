@@ -1,1 +1,0 @@
-certbot-dns-cloudflare==1.19.0

@@ -1,46 +1,41 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:10.0.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:11.0.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy Python requirements file
-COPY requirements.txt /tmp/
-
 # Setup base
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r2 \
-        git=2.32.0-r0 \
-        libffi-dev=3.3-r2 \
-        npm=7.17.0-r0 \
-        openssl-dev=1.1.1k-r0 \
+        git=2.34.1-r0 \
+        libffi-dev=3.4.2-r1 \
+        npm=8.1.3-r0 \
+        openssl-dev=1.1.1l-r8 \
         patch=2.7.6-r7 \
-        python3-dev=3.9.5-r1 \
-        yarn=1.22.10-r0 \
+        python3-dev=3.9.7-r4 \
+        yarn=1.22.17-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.48-r0 \
-        certbot=1.16.0-r0 \
-        libcap=2.50-r0 \
-        mariadb-client=10.5.12-r0 \
-        mariadb=10.5.12-r0 \
-        nginx-mod-stream=1.20.1-r3 \
-        nginx=1.20.1-r3 \
-        nodejs=14.17.4-r0 \
-        openssl=1.1.1k-r0 \
+        apache2-utils=2.4.52-r0 \
+        certbot=1.21.0-r0 \
+        libcap=2.61-r0 \
+        mariadb-client=10.6.4-r2 \
+        mariadb=10.6.4-r2 \
+        nginx-mod-stream=1.20.2-r0 \
+        nginx=1.20.2-r0 \
+        nodejs=16.13.2-r0 \
+        openssl=1.1.1l-r8 \
         py3-pip=20.3.4-r1 \
-        python2=2.7.18-r2 \
-        python3=3.9.5-r1 \
-    \
-    && pip3 install --no-cache-dir -r /tmp/requirements.txt \
+        python2=2.7.18-r4 \
+        python3=3.9.7-r4 \
     \
     && yarn global add modclean \
     \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
-        "https://github.com/jc21/nginx-proxy-manager/archive/v2.8.1.tar.gz" \
+        "https://github.com/jc21/nginx-proxy-manager/archive/v2.9.15.tar.gz" \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \

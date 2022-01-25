@@ -40,7 +40,6 @@ Example add-on configuration:
 log_level: info
 ```
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
 ### Option: `log_level`
 
@@ -78,6 +77,9 @@ cleared automatically_
   by taking a snapshot of just the Nginx Proxy Manager add-on, will not
   contain the data from this add-on. Please make sure you backup both
   the Nginx Proxy Manager and the MariaDB add-ons.
+
+
+**Note**: Since Home Assistant 2021.7 connections from proxies are refused with HTTP code 400. In case you want to proxy to `http://homeassistant:8123` a rule must be added to configuration [as described here][reverseproxies].
 
 ## Changelog & Releases
 
@@ -147,3 +149,4 @@ SOFTWARE.
 [reddit]: https://reddit.com/r/homeassistant
 [releases]: https://github.com/hassio-addons/addon-nginx-proxy-manager/releases
 [semver]: http://semver.org/spec/v2.0.0.htm
+[reverseproxies]: https://www.home-assistant.io/integrations/http#reverse-proxies

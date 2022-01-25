@@ -1,0 +1,5 @@
+{
+  "name": "eroldan version of nginx-proxy-manager",
+  "url": "https://github.com/eroldan/addon-nginx-proxy-manager",
+  "maintainer": "Eduardo Roldan <edo@eroldan.net>"
+}
