@@ -26,7 +26,6 @@ RUN \
         certbot=1.27.0-r0 \
         libcap=2.64-r0 \
         mariadb-client=10.6.8-r0 \
-        mariadb=10.6.8-r0 \
         nginx-mod-stream=1.22.0-r0 \
         nginx=1.22.0-r0 \
         nodejs=16.15.0-r1 \
