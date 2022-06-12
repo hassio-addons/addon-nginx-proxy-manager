@@ -25,6 +25,7 @@ RUN \
         apache2-utils=2.4.54-r0 \
         certbot=1.27.0-r0 \
         libcap=2.64-r0 \
+        logrotate=3.19.0-r1 \
         mariadb-client=10.6.8-r0 \
         nginx-mod-stream=1.22.0-r0 \
         nginx=1.22.0-r0 \
@@ -76,6 +77,9 @@ RUN \
     && rm -f -r /etc/nginx \
     && cp -r /app/docker/rootfs/etc/nginx /etc/nginx \
     && rm -f /etc/nginx/conf.d/dev.conf \
+    \
+    && cp /app/docker/rootfs/etc/letsencrypt.ini /etc \
+    && cp /app/docker/rootfs/etc/logrotate.d/nginx-proxy-manager /etc/logrotate.d \
     \
     && sed -i "s#root /app/frontend;#root /opt/nginx-proxy-manager/frontend;#" \
         /etc/nginx/conf.d/production.conf \
