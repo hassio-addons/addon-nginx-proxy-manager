@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -12,11 +12,11 @@ COPY requirements.txt /tmp/
 # hadolint ignore=DL3003
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        build-base=0.5-r2 \
-        git=2.36.1-r0 \
+        build-base=0.5-r3 \
+        git=2.36.2-r0 \
         libffi-dev=3.4.2-r1 \
         npm=8.10.0-r0 \
-        openssl-dev=1.1.1o-r0 \
+        openssl-dev=1.1.1q-r0 \
         patch=2.7.6-r7 \
         python3-dev=3.10.4-r0 \
         yarn=1.22.19-r0 \
@@ -25,16 +25,16 @@ RUN \
         apache2-utils=2.4.54-r0 \
         certbot=1.27.0-r0 \
         libcap=2.64-r0 \
-        logrotate=3.19.0-r1 \
+        logrotate=3.19.0-r2 \
         mariadb-client=10.6.8-r0 \
-        nginx-mod-stream=1.22.0-r0 \
-        nginx=1.22.0-r0 \
+        nginx-mod-stream=1.22.0-r1 \
+        nginx=1.22.0-r1 \
         nodejs=16.15.0-r1 \
-        openssl=1.1.1o-r0 \
+        openssl=1.1.1q-r0 \
         py3-pip=22.1.1-r0 \
         python3=3.10.4-r0 \
     \
-    && ln -s /usr/bin/python3 /usr/bin/python\
+    && ln -s /usr/bin/python3 /usr/bin/python \
     \
     && pip3 install --no-cache-dir -r /tmp/requirements.txt \
     \
@@ -106,6 +106,7 @@ RUN \
         /etc/init.d/nginx \
         /etc/logrotate.d/nginx \
         /opt/nginx-proxy-manager/node_modules/bcrypt/build \
+        /root/.cache \
         /root/.node-gyp \
         /tmp/.[!.]* \
         /tmp/* \
