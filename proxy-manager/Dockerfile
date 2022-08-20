@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -18,7 +18,7 @@ RUN \
         npm=8.10.0-r0 \
         openssl-dev=1.1.1q-r0 \
         patch=2.7.6-r7 \
-        python3-dev=3.10.4-r0 \
+        python3-dev=3.10.5-r0 \
         yarn=1.22.19-r0 \
     \
     && apk add --no-cache \
@@ -32,7 +32,7 @@ RUN \
         nodejs=16.15.0-r1 \
         openssl=1.1.1q-r0 \
         py3-pip=22.1.1-r0 \
-        python3=3.10.4-r0 \
+        python3=3.10.5-r0 \
     \
     && ln -s /usr/bin/python3 /usr/bin/python \
     \
