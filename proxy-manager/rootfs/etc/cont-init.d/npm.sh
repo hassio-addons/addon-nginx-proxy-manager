@@ -10,17 +10,26 @@ declare mysql_username
 declare query
 
 # Redirect log output to the add-on log
-sed -i 's#/data/logs/error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
-sed -i 's#/data/logs/default.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
-sed -i 's#/data/logs/dead_host-{{ id }}.log#/proc/1/fd/1#g' \
+sed -i 's#/data/logs/fallback_error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
+sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
+sed -i 's#/data/logs/dead-host-{{ id }}_access.log#/proc/1/fd/1#g' \
     /opt/nginx-proxy-manager/templates/dead_host.conf
-sed -i 's#/data/logs/redirection_host-{{ id }}.log#/proc/1/fd/1#g' \
+sed -i 's#/data/logs/dead-host-{{ id }}_error.log#/proc/1/fd/1#g' \
+    /opt/nginx-proxy-manager/templates/dead_host.conf
+sed -i 's#/data/logs/redirection-host-{{ id }}_access.log#/proc/1/fd/1#g' \
     /opt/nginx-proxy-manager/templates/redirection_host.conf
-sed -i 's#/data/logs/proxy_host-{{ id }}.log#/proc/1/fd/1#g' \
+sed -i 's#/data/logs/redirection-host-{{ id }}_error.log#/proc/1/fd/1#g' \
+    /opt/nginx-proxy-manager/templates/redirection_host.conf
+sed -i 's#/data/logs/proxy-host-{{ id }}_access.log#/proc/1/fd/1#g' \
     /opt/nginx-proxy-manager/templates/proxy_host.conf
-sed -i 's#/data/logs/manager.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
-sed -i 's#/data/logs/default.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
-sed -i 's#/data/logs/letsencrypt-requests.log#/proc/1/fd/1#g' \
+sed -i 's#/data/logs/proxy-host-{{ id }}_error.log#/proc/1/fd/1#g' \
+    /opt/nginx-proxy-manager/templates/proxy_host.conf
+sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
+sed -i 's#/data/logs/fallback_error.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
+sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
+sed -i 's#/data/logs/letsencrypt-requests_access.log#/proc/1/fd/1#g' \
+    /opt/nginx-proxy-manager/templates/letsencrypt-request.conf
+sed -i 's#/data/logs/letsencrypt-requests_error.log#/proc/1/fd/1#g' \
     /opt/nginx-proxy-manager/templates/letsencrypt-request.conf
 
 # Store cache in a temporary folder
