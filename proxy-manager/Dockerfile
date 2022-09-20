@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.3
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.4
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -25,8 +25,8 @@ RUN \
         apache2-utils=2.4.54-r0 \
         certbot=1.27.0-r0 \
         libcap=2.64-r0 \
-        logrotate=3.19.0-r2 \
-        mariadb-client=10.6.8-r0 \
+        logrotate=3.19.0-r3 \
+        mariadb-client=10.6.9-r0 \
         nginx-mod-stream=1.22.0-r1 \
         nginx=1.22.0-r1 \
         nodejs=16.16.0-r0 \
