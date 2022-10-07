@@ -8,12 +8,10 @@ declare password
 declare port
 declare username
 
-# Require MySQL service to be available
+# Check if a MySQL service is available
 if ! bashio::services.available "mysql"; then
-    bashio::log.error \
-        "This add-on now requires the MariaDB core add-on 2.0 or newer!"
-    bashio::exit.nok \
-        "Make sure the MariaDB add-on is installed and running"
+    bashio::log.warning \
+        "The MariaDB core add-on (2.0 or newer) is not detected, make sure it is installed and running"
 fi
 
 host=$(bashio::services "mysql" "host")
