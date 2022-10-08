@@ -8,7 +8,7 @@ declare password
 declare port
 declare username
 
-# Check if a MySQL service is not available
+# If a MySQL service is not available
 # Then log a warning message and continue
 if ! bashio::services.available "mysql"; then
     bashio::log.warning \
