@@ -8,7 +8,8 @@ declare password
 declare port
 declare username
 
-# Check if a MySQL service is available
+# Check if a MySQL service is not available
+# Then log a warning message and continue
 if ! bashio::services.available "mysql"; then
     bashio::log.warning \
         "The MariaDB core add-on (2.0 or newer) is not detected, make sure it is installed and running"
