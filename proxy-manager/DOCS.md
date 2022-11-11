@@ -82,6 +82,17 @@ cleared automatically_
   by taking a snapshot of just the Nginx Proxy Manager add-on, will not
   contain the data from this add-on. Please make sure you backup both
   the Nginx Proxy Manager and the MariaDB add-ons.
+- Home Asssitant Core will block unconfigured reverse proxies with a `400` 
+  HTTP response. You may specify the IP address of your NPM's container as a 
+  trusted proxy.
+  
+  ```yaml
+   # Enable NPM as reverse proxy for HTTP/HTTPS traffic
+   http:
+     use_x_forwarded_for: true
+     trusted_proxies: 
+       - YOUR_CONTAINER_IP
+   ```
 
 ## Changelog & Releases
 
