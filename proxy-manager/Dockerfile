@@ -41,7 +41,7 @@ RUN \
     && yarn global add modclean \
     \
     && curl -J -L -o /tmp/nginxproxymanager.tar.gz \
-        "https://github.com/jc21/nginx-proxy-manager/archive/v2.9.18.tar.gz" \
+        "https://github.com/jc21/nginx-proxy-manager/archive/v2.9.19.tar.gz" \
     && mkdir /app \
     && tar zxvf \
         /tmp/nginxproxymanager.tar.gz \
