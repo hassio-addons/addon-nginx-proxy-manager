@@ -27,6 +27,8 @@ ports_description:
 map:
   - ssl:rw
   - backup:rw
+backup_exclude:
+  - "*/logs"
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   reset_database: bool?
