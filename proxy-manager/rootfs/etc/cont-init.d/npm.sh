@@ -62,7 +62,9 @@ fi
 
 if ! bashio::fs.directory_exists "/data/manager"; then
     mkdir /data/manager
-    cp /defaults/production.json /data/manager/production.json
+    if bashio::config.false 'use_sqlite'; then
+      cp /defaults/production.json /data/manager/production.json
+    fi
 fi
 
 if ! bashio::fs.directory_exists "/ssl/nginxproxymanager"; then
@@ -127,19 +129,21 @@ then
     || bashio::exit.nok "Could not generate dummy certificate"
 fi
 
-# Set up database connection
-mysql_host=$(bashio::services "mysql" "host")
-mysql_password=$(bashio::services "mysql" "password")
-mysql_port=$(bashio::services "mysql" "port")
-mysql_username=$(bashio::services "mysql" "username")
+if bashio::config.false 'use_sqlite'; then
+    # Set up database connection
+    mysql_host=$(bashio::services "mysql" "host")
+    mysql_password=$(bashio::services "mysql" "password")
+    mysql_port=$(bashio::services "mysql" "port")
+    mysql_username=$(bashio::services "mysql" "username")
 
-query=".database.engine = \"mysql\"
-    | .database.host = \"${mysql_host}\"
-    | .database.name = \"nginxproxymanager\"
-    | .database.user = \"${mysql_username}\"
-    | .database.password = \"${mysql_password}\"
-    | .database.port = ${mysql_port}"
+    query=".database.engine = \"mysql\"
+        | .database.host = \"${mysql_host}\"
+        | .database.name = \"nginxproxymanager\"
+        | .database.user = \"${mysql_username}\"
+        | .database.password = \"${mysql_password}\"
+        | .database.port = ${mysql_port}"
 
-# shellcheck disable=SC2094
-cat <<< "$(jq "${query}" /data/manager/production.json)" \
-    > /data/manager/production.json
+    # shellcheck disable=SC2094
+    cat <<< "$(jq "${query}" /data/manager/production.json)" \
+        > /data/manager/production.json
+fi

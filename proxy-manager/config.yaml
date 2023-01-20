@@ -13,8 +13,8 @@ arch:
   - armhf
   - armv7
   - i386
-services:
-  - mysql:need
+#services:
+#  - mysql:need
 hassio_api: true
 ports:
   80/tcp: 80
@@ -29,6 +29,9 @@ map:
   - backup:rw
 backup_exclude:
   - "*/logs"
+options:
+  use_sqlite: false
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   reset_database: bool?
+  use_sqlite: bool
