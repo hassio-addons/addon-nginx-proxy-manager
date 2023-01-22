@@ -3,11 +3,6 @@
 # Home Assistant Community Add-on: Nginx Proxy Manager
 # This file applies patches so the add-on becomes compatible
 # ==============================================================================
-declare mysql_host
-declare mysql_password
-declare mysql_port
-declare mysql_username
-declare query
 
 # Redirect log output to the add-on log
 sed -i 's#/data/logs/fallback_error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
@@ -62,9 +57,6 @@ fi
 
 if ! bashio::fs.directory_exists "/data/manager"; then
     mkdir /data/manager
-    if bashio::config.false 'use_sqlite'; then
-      cp /defaults/production.json /data/manager/production.json
-    fi
 fi
 
 if ! bashio::fs.directory_exists "/ssl/nginxproxymanager"; then
@@ -127,23 +119,4 @@ then
     -keyout /data/nginx/dummykey.pem \
     -out /data/nginx/dummycert.pem \
     || bashio::exit.nok "Could not generate dummy certificate"
-fi
-
-if bashio::config.false 'use_sqlite'; then
-    # Set up database connection
-    mysql_host=$(bashio::services "mysql" "host")
-    mysql_password=$(bashio::services "mysql" "password")
-    mysql_port=$(bashio::services "mysql" "port")
-    mysql_username=$(bashio::services "mysql" "username")
-
-    query=".database.engine = \"mysql\"
-        | .database.host = \"${mysql_host}\"
-        | .database.name = \"nginxproxymanager\"
-        | .database.user = \"${mysql_username}\"
-        | .database.password = \"${mysql_password}\"
-        | .database.port = ${mysql_port}"
-
-    # shellcheck disable=SC2094
-    cat <<< "$(jq "${query}" /data/manager/production.json)" \
-        > /data/manager/production.json
 fi

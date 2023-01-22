@@ -29,9 +29,6 @@ map:
   - backup:rw
 backup_exclude:
   - "*/logs"
-options:
-  use_sqlite: false
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   reset_database: bool?
-  use_sqlite: bool

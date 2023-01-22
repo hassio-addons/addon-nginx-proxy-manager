@@ -121,6 +121,9 @@ RUN \
 # Copy root filesystem
 COPY rootfs /
 
+# Set sqlite database name
+ENV DB_SQLITE_FILE  /data/database.sqlite
+
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
