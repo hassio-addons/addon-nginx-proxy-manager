@@ -35,9 +35,7 @@ RUN \
         py3-pip=22.3.1-r1 \
         python3=3.10.10-r0 \
     \
-    && ln -s /usr/bin/python3 /usr/bin/python \
-    \
-    && pip3 install --no-cache-dir -r /tmp/requirements.txt \
+    && pip3 install -r /tmp/requirements.txt \
     \
     && yarn global add modclean \
     \
