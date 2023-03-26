@@ -15,7 +15,7 @@ RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r3 \
         git=2.38.4-r1 \
-        libffi-dev=3.4.2-r1 \
+        libffi-dev=3.4.4-r0 \
         npm=9.1.2-r0 \
         openssl-dev=1.1.1s-r0 \
         patch=2.7.6-r8 \
