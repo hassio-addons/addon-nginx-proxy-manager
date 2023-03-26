@@ -24,7 +24,7 @@ RUN \
     \
     && apk add --no-cache \
         apache2-utils=2.4.54-r0 \
-        certbot=1.27.0-r0 \
+        certbot=1.32.0-r0 \
         libcap=2.64-r0 \
         logrotate=3.19.0-r3 \
         mariadb-client=10.6.10-r0 \
