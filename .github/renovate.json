@@ -30,7 +30,7 @@
       "matchStrings": [
         "ARG NGINX_PROXY_MANAGER_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
       ],
-      "datasourceTemplate": "github-tags",
+      "datasourceTemplate": "github-releases",
       "depNameTemplate": "NginxProxyManager/nginx-proxy-manager"
     }
   ],
@@ -75,6 +75,12 @@
       "groupName": "Python",
       "matchDatasources": ["repology"],
       "matchDepPatterns": ["^alpine.*/python.*"],
+      "automerge": true
+    },
+    {
+      "matchDatasources": ["github-releases"],
+      "matchDepNames": ["NginxProxyManager/nginx-proxy-manager"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
     }
   ]
