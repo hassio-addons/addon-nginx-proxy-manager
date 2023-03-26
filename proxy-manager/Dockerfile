@@ -26,7 +26,7 @@ RUN \
         apache2-utils=2.4.56-r0 \
         certbot=1.32.0-r0 \
         libcap=2.64-r0 \
-        logrotate=3.19.0-r3 \
+        logrotate=3.20.1-r3 \
         mariadb-client=10.6.12-r0 \
         nginx-mod-stream=1.22.1-r0 \
         nginx=1.22.1-r0 \
