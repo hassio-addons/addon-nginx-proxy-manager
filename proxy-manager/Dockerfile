@@ -19,7 +19,7 @@ RUN \
         npm=9.1.2-r0 \
         openssl-dev=1.1.1s-r0 \
         patch=2.7.6-r7 \
-        python3-dev=3.10.8-r0 \
+        python3-dev=3.10.10-r0 \
         yarn=1.22.19-r0 \
     \
     && apk add --no-cache \
@@ -33,7 +33,7 @@ RUN \
         nodejs=18.14.2-r0 \
         openssl=1.1.1s-r0 \
         py3-pip=22.1.1-r0 \
-        python3=3.10.8-r0 \
+        python3=3.10.10-r0 \
     \
     && ln -s /usr/bin/python3 /usr/bin/python \
     \
