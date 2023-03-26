@@ -18,7 +18,7 @@ RUN \
         libffi-dev=3.4.2-r1 \
         npm=9.1.2-r0 \
         openssl-dev=1.1.1s-r0 \
-        patch=2.7.6-r7 \
+        patch=2.7.6-r8 \
         python3-dev=3.10.10-r0 \
         yarn=1.22.19-r0 \
     \
