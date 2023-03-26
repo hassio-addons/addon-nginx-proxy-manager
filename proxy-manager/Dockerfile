@@ -2,6 +2,9 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/base:13.1.4
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
+# Required for webpack config of NPM
+ENV NODE_OPTIONS="--openssl-legacy-provider"
+
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
