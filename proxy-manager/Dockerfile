@@ -17,7 +17,7 @@ ARG NGINX_PROXY_MANAGER_VERSION="v2.10.2"
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r3 \
-        git=2.38.4-r1 \
+        git=2.38.5-r0 \
         libffi-dev=3.4.4-r0 \
         npm=9.1.2-r0 \
         openssl-dev=3.0.8-r4 \
