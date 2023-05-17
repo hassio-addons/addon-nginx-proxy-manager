@@ -28,7 +28,7 @@ RUN \
     && apk add --no-cache \
         apache2-utils=2.4.57-r2 \
         certbot=2.6.0-r0 \
-        libcap=2.68-r2 \
+        libcap=2.69-r0 \
         logrotate=3.21.0-r1 \
         mariadb-client=10.11.3-r0 \
         nginx-mod-stream=1.24.0-r3 \
