@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.2.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -20,23 +20,23 @@ RUN \
         git=2.40.1-r0 \
         libffi-dev=3.4.4-r2 \
         npm=9.6.6-r0 \
-        openssl-dev=3.1.0-r4 \
+        openssl-dev=3.1.3-r0 \
         patch=2.7.6-r10 \
-        python3-dev=3.11.3-r11 \
+        python3-dev=3.11.6-r0 \
         yarn=1.22.19-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.57-r2 \
+        apache2-utils=2.4.57-r3 \
         certbot=2.6.0-r0 \
         libcap=2.69-r0 \
         logrotate=3.21.0-r1 \
-        mariadb-client=10.11.3-r0 \
-        nginx-mod-stream=1.24.0-r3 \
-        nginx=1.24.0-r3 \
-        nodejs=18.16.0-r1 \
-        openssl=3.1.0-r4 \
+        mariadb-client=10.11.5-r0 \
+        nginx-mod-stream=1.24.0-r6 \
+        nginx=1.24.0-r6 \
+        nodejs=18.18.2-r0 \
+        openssl=3.1.3-r0 \
         py3-pip=23.1.2-r0 \
-        python3=3.11.3-r11 \
+        python3=3.11.6-r0 \
     \
     && pip3 install -r /tmp/requirements.txt \
     \
