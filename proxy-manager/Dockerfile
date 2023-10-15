@@ -33,7 +33,7 @@ RUN \
         mariadb-client=10.6.12-r0 \
         nginx-mod-stream=1.22.1-r0 \
         nginx=1.22.1-r0 \
-        nodejs=18.14.2-r0 \
+        nodejs=18.18.2-r0 \
         openssl=3.0.8-r4 \
         py3-pip=22.3.1-r1 \
         python3=3.10.11-r0 \
