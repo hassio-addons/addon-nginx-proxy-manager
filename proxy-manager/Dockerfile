@@ -56,6 +56,11 @@ RUN \
     && sed -i "s#, 'streams',#,#g" \
         /app/frontend/js/app/user/permissions.ejs \
     \
+    && sed -i "s#6.0.1#8.0.0#g" \
+        /app/frontend/package.json \
+    && sed -i "s#10.2.0#10.4.1#g" \
+        /app/frontend/package.json \
+    \
     && cd /app/frontend \
     && yarn install \
     && yarn build \
