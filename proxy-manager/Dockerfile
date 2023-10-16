@@ -31,8 +31,8 @@ RUN \
         libcap=2.69-r0 \
         logrotate=3.21.0-r1 \
         mariadb-client=10.11.5-r0 \
-        nginx-mod-stream=1.24.0-r6 \
-        nginx=1.24.0-r6 \
+        nginx-mod-stream=1.24.0-r7 \
+        nginx=1.24.0-r7 \
         nodejs=18.18.2-r0 \
         openssl=3.1.3-r0 \
         py3-pip=23.1.2-r0 \
