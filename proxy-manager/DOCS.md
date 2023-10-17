@@ -19,8 +19,6 @@ Nginx proxy manager by providing additional Nginx directives.
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
 
-1. Ensure you are running the MariaDB add-on. This add-on is required to use
-   the Nginx Proxy Manager add-on as it uses the database services provided.
 1. Click the Home Assistant My button below to open the add-on on your Home
    Assistant instance.
 
@@ -64,24 +62,12 @@ more severe level, e.g., `debug` also shows `info` messages. By default,
 the `log_level` is set to `info`, which is the recommended setting unless
 you are troubleshooting.
 
-### Option: `reset_database`
-
-By setting to `true` provides the option to delete and recreate the database. As
-the data is held within the MariaDB addon, it is not removed on an uninstall.
-
-**Note**: _Once the database is reset the configuration for the addon will be
-cleared automatically_
-
 ## Known issues and limitations
 
 - The original NGinx Proxy Manager has support for forwarding TCP/UDP streams,
   which is removed from this add-on. It makes no sense from a
   Home Assistant / Home perspective and, by removing it, it also
   removed the need for this add-on to run on the Docker host network.
-- This add-on stores its database on the MariaDB add-on. This also means that
-  by taking a snapshot of just the Nginx Proxy Manager add-on, will not
-  contain the data from this add-on. Please make sure you backup both
-  the Nginx Proxy Manager and the MariaDB add-ons.
 
 ## Changelog & Releases
 
