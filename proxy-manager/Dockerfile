@@ -95,7 +95,6 @@ RUN \
         /opt/nginx-proxy-manager/migrations/20190227065017_settings.js \
     \
     && mkdir -p \
-        /run/mysqld \
         /run/nginx \
     \
     && modclean \
