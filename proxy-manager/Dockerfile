@@ -26,7 +26,7 @@ RUN \
         yarn=1.22.19-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.57-r3 \
+        apache2-utils=2.4.58-r0 \
         certbot=2.6.0-r0 \
         libcap=2.69-r0 \
         logrotate=3.21.0-r1 \
