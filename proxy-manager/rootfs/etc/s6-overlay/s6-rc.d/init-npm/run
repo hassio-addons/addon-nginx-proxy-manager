@@ -38,38 +38,33 @@ sed -i 's#/var/lib/nginx/cache/private#/tmp/nginx/cache/private#g' \
 sed -i 's#daemon off;#daemon off;\nload_module /usr/lib/nginx/modules/ngx_stream_module.so;#g' \
     /etc/nginx/nginx.conf
 
-if ! bashio::fs.directory_exists "/data/nginx"; then
+if ! bashio::fs.directory_exists "/config/nginx"; then
     mkdir -p \
-        /data/nginx/dead_host \
-        /data/nginx/proxy_host \
-        /data/nginx/redirection_host \
-        /data/nginx/stream \
-        /data/nginx/temp
+        /config/nginx/dead_host \
+        /config/nginx/proxy_host \
+        /config/nginx/redirection_host \
+        /config/nginx/stream \
+        /config/nginx/temp
 fi
 
-if ! bashio::fs.directory_exists "/data/logs/letsencrypt"; then
-    mkdir -p /data/logs/letsencrypt
+if ! bashio::fs.directory_exists "/config/logs/letsencrypt"; then
+    mkdir -p /config/logs/letsencrypt
 fi
 
-if ! bashio::fs.directory_exists "/data/letsencrypt-acme-challenge"; then
-    mkdir /data/letsencrypt-acme-challenge
-    mkdir /data/letsencrypt-workdir
+if ! bashio::fs.directory_exists "/config/letsencrypt-acme-challenge"; then
+    mkdir /config/letsencrypt-acme-challenge
+    mkdir /config/letsencrypt-workdir
 fi
 
-if ! bashio::fs.directory_exists "/data/manager"; then
-    mkdir /data/manager
-    cp /defaults/production.json /data/manager/production.json
-fi
-
-if ! bashio::fs.directory_exists "/ssl/nginxproxymanager"; then
+if ! bashio::fs.directory_exists "/config/letsencrypt"; then
     mkdir -p \
-        /ssl/nginxproxymanager
+        /config/letsencrypt
 fi
 
-if ! bashio::fs.directory_exists "/data/nginx/default_host"; then
+if ! bashio::fs.directory_exists "/config/nginx/default_host"; then
     mkdir -p \
-        /data/nginx/default_host \
-        /data/nginx/default_www
+        /config/nginx/default_host \
+        /config/nginx/default_www
 fi
 
 # Creates basic temporary files directory structure
@@ -84,22 +79,9 @@ mkdir -p \
 
 ln -s /tmp/nginx /var/tmp/nginx
 ln -s /tmp/nginx /var/lib/nginx/tmp
-ln -s /data/manager /opt/nginx-proxy-manager/config
+ln -s /config/npm /opt/nginx-proxy-manager/config
 
-#Tidy unneeded symlinks
-if bashio::fs.file_exists "/data/logs/default.log"; then
-    unlink /data/logs/default.log
-fi
-
-if  bashio::fs.file_exists "/data/logs/manager.log"; then
-    unlink /data/logs/manager.log
-fi
-
-if bashio::fs.file_exists "/data/logs/letsencrypt-requests.log"; then
-    unlink /data/logs/letsencrypt-requests.log
-fi
-
-ln -sf /ssl/nginxproxymanager /etc/letsencrypt
+ln -sf /config/letsencrypt /etc/letsencrypt
 
 # NGinx needs this file to be able to start.
 # It will not continously log into it.
@@ -108,7 +90,7 @@ touch /var/lib/nginx/logs/error.log
 chmod 777 /var/lib/nginx/logs/error.log
 
 # This file generates a dummy SSL certificate
-if ! bashio::fs.directory_exists "/data/nginx/dummycert.pem" && ! bashio::fs.file_exists "/data/nginx/dummykey.pem";
+if ! bashio::fs.directory_exists "/config/nginx/dummycert.pem" && ! bashio::fs.file_exists "/config/nginx/dummykey.pem";
 then
   bashio::log.info "Generating dummy SSL certificate"
   openssl req \
@@ -118,10 +100,7 @@ then
     -nodes \
     -x509 \
     -subj '/O=Nginx Proxy Manager/OU=Dummy Certificate/CN=localhost' \
-    -keyout /data/nginx/dummykey.pem \
-    -out /data/nginx/dummycert.pem \
+    -keyout /config/nginx/dummykey.pem \
+    -out /config/nginx/dummycert.pem \
     || bashio::exit.nok "Could not generate dummy certificate"
 fi
-
-# Clean up old database configuration file
-rm -f /data/manager/production.json
