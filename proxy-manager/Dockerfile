@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.3.2
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-nodejs:0.1.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -17,25 +17,22 @@ ARG NGINX_PROXY_MANAGER_VERSION="v2.10.4"
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         build-base=0.5-r3 \
-        git=2.40.1-r0 \
-        libffi-dev=3.4.4-r2 \
-        npm=9.6.6-r0 \
-        openssl-dev=3.1.4-r1 \
+        git=2.43.0-r0 \
+        libffi-dev=3.4.4-r3 \
+        openssl-dev=3.1.4-r2 \
         patch=2.7.6-r10 \
-        python3-dev=3.11.6-r0 \
-        yarn=1.22.19-r0 \
+        python3-dev=3.11.6-r1 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.58-r0 \
-        certbot=2.6.0-r0 \
-        libcap=2.69-r0 \
+        apache2-utils=2.4.58-r1 \
+        certbot=2.7.4-r0 \
+        libcap=2.69-r1 \
         logrotate=3.21.0-r1 \
-        nginx-mod-stream=1.24.0-r7 \
-        nginx=1.24.0-r7 \
-        nodejs=18.18.2-r0 \
-        openssl=3.1.4-r1 \
-        py3-pip=23.1.2-r0 \
-        python3=3.11.6-r0 \
+        nginx-mod-stream=1.24.0-r14 \
+        nginx=1.24.0-r14 \
+        openssl=3.1.4-r2 \
+        py3-pip=23.3.1-r0 \
+        python3=3.11.6-r1 \
     \
     && pip3 install -r /tmp/requirements.txt \
     \
