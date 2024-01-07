@@ -21,8 +21,7 @@ ports_description:
   81/tcp: Proxy management web interface
   443/tcp: HTTPS/SSL Entrance port
 map:
-  - ssl:rw
-  - backup:rw
+  - addon_config:rw
 backup_exclude:
   - "*/logs"
 schema:

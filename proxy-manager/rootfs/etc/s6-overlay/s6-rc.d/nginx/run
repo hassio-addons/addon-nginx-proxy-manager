@@ -11,9 +11,9 @@ bashio::log.info "Starting NGinx..."
 mkdir -p \
   /tmp/nginx/body \
   /var/log/nginx \
-  /data/custom_ssl \
-  /data/logs \
-  /data/access \
+  /config/custom_ssl \
+  /config/logs \
+  /config/access \
   /tmp/nginx/cache/public \
   /tmp/nginx/cache/private \
   /var/cache/nginx/proxy_temp
