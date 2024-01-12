@@ -29,45 +29,13 @@ comparison to installing any other Home Assistant add-on.
 1. Check the logs of the "Nginx Proxy Manager" add-on to see if everything went well.
 1. Click the "OPEN WEB UI" button and login using:
    `admin@example.com` / `changeme`
-1. Forward port `80` and `443` from your router to your Home Assistant machine.
+1. Forward port `443` (and optionally `80`) from your router to your
+   Home Assistant machine.
 1. Enjoy the add-on!
 
 ## Configuration
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
-
-Example add-on configuration:
-
-```yaml
-log_level: info
-```
-
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
-
-### Option: `log_level`
-
-The `log_level` option controls the level of log output by the addon and can
-be changed to be more or less verbose, which might be useful when you are
-dealing with an unknown issue. Possible values are:
-
-- `trace`: Show every detail, like all called internal functions.
-- `debug`: Shows detailed debug information.
-- `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
-- `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
-
-Please note that each level automatically includes log messages from a
-more severe level, e.g., `debug` also shows `info` messages. By default,
-the `log_level` is set to `info`, which is the recommended setting unless
-you are troubleshooting.
-
-## Known issues and limitations
-
-- The original NGinx Proxy Manager has support for forwarding TCP/UDP streams,
-  which is removed from this add-on. It makes no sense from a
-  Home Assistant / Home perspective and, by removing it, it also
-  removed the need for this add-on to run on the Docker host network.
+This add-on does not provide any configuration.
 
 ## Changelog & Releases
 
@@ -108,7 +76,7 @@ check [the contributor's page][contributors].
 
 MIT License
 
-Copyright (c) 2019-2023 Franck Nijhof
+Copyright (c) 2019-2024 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
