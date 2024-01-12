@@ -8,8 +8,9 @@ ENV NODE_OPTIONS="--openssl-legacy-provider"
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy Python requirements file
+# Copy Python requirements file & patches
 COPY requirements.txt /tmp/
+COPY patches/*.patch /usr/src/
 
 # Setup base
 ARG NGINX_PROXY_MANAGER_VERSION="v2.10.4"
@@ -45,17 +46,8 @@ RUN \
         /tmp/nginxproxymanager.tar.gz \
         --strip 1 -C /app \
     \
-    && sed -i "s#canShow('streams')#false#g" \
-        /app/frontend/js/app/ui/menu/main.ejs \
-    && sed -i "s#canShow('streams')#false#g" \
-        /app/frontend/js/app/dashboard/main.ejs \
-    && sed -i "s#, 'streams',#,#g" \
-        /app/frontend/js/app/user/permissions.ejs \
-    \
-    && sed -i "s#6.0.1#8.0.0#g" \
-        /app/frontend/package.json \
-    && sed -i "s#10.2.0#10.4.1#g" \
-        /app/frontend/package.json \
+    && for i in /usr/src/*.patch; do \
+        patch -d /app -p 1 < "${i}"; done \
     \
     && cd /app/frontend \
     && yarn install \

@@ -16,13 +16,7 @@ ports:
   80/tcp: 80
   81/tcp: 81
   443/tcp: 443
-ports_description:
-  80/tcp: HTTP Entrance port
-  81/tcp: Proxy management web interface
-  443/tcp: HTTPS/SSL Entrance port
 map:
   - addon_config:rw
 backup_exclude:
   - "*/logs"
-schema:
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?

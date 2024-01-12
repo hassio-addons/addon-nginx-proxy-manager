@@ -4,82 +4,27 @@
 # Home Assistant Community Add-on: Nginx Proxy Manager
 # This file applies patches so the add-on becomes compatible
 # ==============================================================================
-
-# Redirect log output to the add-on log
-sed -i 's#/data/logs/fallback_error.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
-sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/nginx.conf
-sed -i 's#/data/logs/dead-host-{{ id }}_access.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/dead_host.conf
-sed -i 's#/data/logs/dead-host-{{ id }}_error.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/dead_host.conf
-sed -i 's#/data/logs/redirection-host-{{ id }}_access.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/redirection_host.conf
-sed -i 's#/data/logs/redirection-host-{{ id }}_error.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/redirection_host.conf
-sed -i 's#/data/logs/proxy-host-{{ id }}_access.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/proxy_host.conf
-sed -i 's#/data/logs/proxy-host-{{ id }}_error.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/proxy_host.conf
-sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
-sed -i 's#/data/logs/fallback_error.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
-sed -i 's#/data/logs/fallback_access.log#/proc/1/fd/1#g' /etc/nginx/conf.d/default.conf
-sed -i 's#/data/logs/letsencrypt-requests_access.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/letsencrypt-request.conf
-sed -i 's#/data/logs/letsencrypt-requests_error.log#/proc/1/fd/1#g' \
-    /opt/nginx-proxy-manager/templates/letsencrypt-request.conf
-
-# Store cache in a temporary folder
-sed -i 's#/var/lib/nginx/cache/public#/tmp/nginx/cache/public#g' \
-    /etc/nginx/nginx.conf
-sed -i 's#/var/lib/nginx/cache/private#/tmp/nginx/cache/private#g' \
-    /etc/nginx/nginx.conf
-
-# Add Stream module
-sed -i 's#daemon off;#daemon off;\nload_module /usr/lib/nginx/modules/ngx_stream_module.so;#g' \
-    /etc/nginx/nginx.conf
-
-if ! bashio::fs.directory_exists "/config/nginx"; then
-    mkdir -p \
-        /config/nginx/dead_host \
-        /config/nginx/proxy_host \
-        /config/nginx/redirection_host \
-        /config/nginx/stream \
-        /config/nginx/temp
-fi
-
-if ! bashio::fs.directory_exists "/config/logs/letsencrypt"; then
-    mkdir -p /config/logs/letsencrypt
-fi
-
-if ! bashio::fs.directory_exists "/config/letsencrypt-acme-challenge"; then
-    mkdir /config/letsencrypt-acme-challenge
-    mkdir /config/letsencrypt-workdir
-fi
-
-if ! bashio::fs.directory_exists "/config/letsencrypt"; then
-    mkdir -p \
-        /config/letsencrypt
-fi
-
-if ! bashio::fs.directory_exists "/config/nginx/default_host"; then
-    mkdir -p \
-        /config/nginx/default_host \
-        /config/nginx/default_www
-fi
-
-# Creates basic temporary files directory structure
-# Needed for caching
 mkdir -p \
-    /tmp/nginx \
-    /tmp/nginx/proxy \
+    /config/access \
+    /config/custom_ssl \
+    /config/letsencrypt-acme-challenge \
+    /config/logs \
+    /config/nginx/dead_host \
+    /config/nginx/default_host \
+    /config/nginx/default_www \
+    /config/nginx/proxy_host \
+    /config/nginx/redirection_host \
+    /config/nginx/stream \
+    /config/nginx/temp \
     /tmp/nginx/body \
+    /tmp/nginx/cache/private\
     /tmp/nginx/cache/public \
-    /tmp/nginx/cache/private \
+    /tmp/nginx/proxy \
     /var/lib/nginx/
 
 ln -s /tmp/nginx /var/tmp/nginx
 ln -s /tmp/nginx /var/lib/nginx/tmp
-ln -s /config/npm /opt/nginx-proxy-manager/config
+ln -s /config /opt/nginx-proxy-manager/config
 
 ln -sf /config/letsencrypt /etc/letsencrypt
 
