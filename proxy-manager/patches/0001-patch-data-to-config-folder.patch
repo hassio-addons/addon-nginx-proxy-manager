@@ -326,7 +326,7 @@ index 8261833..8d3ca91 100644
 @@ -1,5 +1,6 @@
  # run nginx in foreground
  daemon off;
-+load_module /usr/lib/nginx/modules/ngx_stream_module.so
++load_module /usr/lib/nginx/modules/ngx_stream_module.so;
  pid /run/nginx/nginx.pid;
  user npm;
  
