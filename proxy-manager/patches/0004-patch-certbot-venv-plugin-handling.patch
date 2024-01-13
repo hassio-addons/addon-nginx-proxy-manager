@@ -30,7 +30,7 @@ index 403c14e..7451271 100644
  
  				if (plugins.length) {
 -					const install_cmd = '. /opt/certbot/bin/activate && pip install --no-cache-dir ' + plugins.join(' ') + ' && deactivate';
-+					const install_cmd = 'pip install ' + plugins.join(' ')';
++					const install_cmd = 'pip install ' + plugins.join(' ');
  					promises.push(utils.exec(install_cmd));
  				}
  
