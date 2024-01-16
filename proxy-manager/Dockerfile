@@ -20,7 +20,7 @@ RUN \
         build-base=0.5-r3 \
         git=2.43.0-r0 \
         libffi-dev=3.4.4-r3 \
-        openssl-dev=3.1.4-r3 \
+        openssl-dev=3.1.4-r4 \
         patch=2.7.6-r10 \
         python3-dev=3.11.6-r1 \
     \
