@@ -31,7 +31,7 @@ RUN \
         logrotate=3.21.0-r1 \
         nginx-mod-stream=1.24.0-r14 \
         nginx=1.24.0-r14 \
-        openssl=3.1.4-r3 \
+        openssl=3.1.4-r4 \
         py3-pip=23.3.1-r0 \
         python3=3.11.6-r1 \
     \
