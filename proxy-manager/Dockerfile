@@ -22,7 +22,7 @@ RUN \
         libffi-dev=3.4.4-r3 \
         openssl-dev=3.1.4-r5 \
         patch=2.7.6-r10 \
-        python3-dev=3.11.6-r1 \
+        python3-dev=3.11.8-r0 \
     \
     && apk add --no-cache \
         apache2-utils=2.4.58-r1 \
@@ -33,7 +33,7 @@ RUN \
         nginx=1.24.0-r15 \
         openssl=3.1.4-r5 \
         py3-pip=23.3.1-r0 \
-        python3=3.11.6-r1 \
+        python3=3.11.8-r0 \
     \
     && pip3 install -r /tmp/requirements.txt \
     \
