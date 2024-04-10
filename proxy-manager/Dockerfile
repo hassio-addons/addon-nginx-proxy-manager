@@ -20,7 +20,7 @@ RUN \
         build-base=0.5-r3 \
         git=2.43.0-r0 \
         libffi-dev=3.4.4-r3 \
-        openssl-dev=3.1.4-r5 \
+        openssl-dev=3.1.4-r6 \
         patch=2.7.6-r10 \
         python3-dev=3.11.8-r0 \
     \
@@ -31,7 +31,7 @@ RUN \
         logrotate=3.21.0-r1 \
         nginx-mod-stream=1.24.0-r15 \
         nginx=1.24.0-r15 \
-        openssl=3.1.4-r5 \
+        openssl=3.1.4-r6 \
         py3-pip=23.3.1-r0 \
         python3=3.11.8-r0 \
     \
