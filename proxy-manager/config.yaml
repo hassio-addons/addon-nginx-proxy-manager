@@ -18,5 +18,6 @@ ports:
   443/tcp: 443
 map:
   - addon_config:rw
+  - ssl:ro
 backup_exclude:
   - "*/logs"
