@@ -6,6 +6,7 @@ description: Manage Nginx proxy hosts with a simple, powerful interface
 url: https://github.com/hassio-addons/addon-nginx-proxy-manager
 codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:81]
+startup: services
 init: false
 arch:
   - aarch64
