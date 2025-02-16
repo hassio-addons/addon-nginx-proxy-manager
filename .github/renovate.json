@@ -5,8 +5,9 @@
   "labels": ["dependencies", "no-stale"],
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": ["/Dockerfile$", "/build.yaml$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
@@ -16,6 +17,7 @@
       "datasourceTemplate": "docker"
     },
     {
+      "customType": "regex",
       "fileMatch": ["/Dockerfile$"],
       "matchStringsStrategy": "any",
       "matchStrings": [
@@ -26,6 +28,7 @@
       "depNameTemplate": "alpine_3_19/{{package}}"
     },
     {
+      "customType": "regex",
       "fileMatch": ["/Dockerfile$"],
       "matchStrings": [
         "ARG NGINX_PROXY_MANAGER_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"
@@ -62,20 +65,20 @@
     {
       "groupName": "NGINX",
       "matchDatasources": ["repology"],
-      "matchDepPatterns": ["^alpine.*/nginx.*"],
-      "automerge": true
+      "automerge": true,
+      "matchDepNames": ["/^alpine.*/nginx.*/"]
     },
     {
       "groupName": "OpenSSL",
       "matchDatasources": ["repology"],
-      "matchDepPatterns": ["^alpine.*/openssl.*"],
-      "automerge": true
+      "automerge": true,
+      "matchDepNames": ["/^alpine.*/openssl.*/"]
     },
     {
       "groupName": "Python",
       "matchDatasources": ["repology"],
-      "matchDepPatterns": ["^alpine.*/python.*"],
-      "automerge": true
+      "automerge": true,
+      "matchDepNames": ["/^alpine.*/python.*/"]
     },
     {
       "matchDatasources": ["github-releases"],
