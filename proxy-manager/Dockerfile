@@ -29,8 +29,8 @@ RUN \
         certbot=3.0.1-r0 \
         libcap=2.71-r0 \
         logrotate=3.21.0-r1 \
-        nginx-mod-stream=1.26.2-r4 \
-        nginx=1.26.2-r4 \
+        nginx-mod-stream=1.26.3-r0 \
+        nginx=1.26.3-r0 \
         openssl=3.3.3-r0 \
         py3-pip=24.3.1-r0 \
         python3=3.12.9-r0 \
