@@ -1,0 +1,19 @@
+--- a/frontend/webpack.config.js
++++ b/frontend/webpack.config.js
+@@ -75,9 +75,14 @@ module.exports = {
+ 			{
+ 				test: /\.scss$/,
+ 				use:  [
+ 					MiniCssExtractPlugin.loader,
+-					'css-loader',
+-					'sass-loader'
++					'css-loader', 
++					{
++						loader: 'sass-loader',
++						options: {
++							implementation: require('sass')
++						}
++					}
+ 				]
+ 			},
+ 			{
