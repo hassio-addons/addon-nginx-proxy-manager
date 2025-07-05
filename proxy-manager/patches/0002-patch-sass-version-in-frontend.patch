@@ -1,0 +1,29 @@
+From e330c52d9d0ae4c60f77116a90af0a2289c5fce0 Mon Sep 17 00:00:00 2001
+From: pustekuchen91 <7147324+pustekuchen91@users.noreply.github.com>
+Date: Sat, 5 Jul 2025 11:57:30 +0200
+Subject: [PATCH] Patch sass in frontend
+
+---
+ frontend/package.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/frontend/package.json b/frontend/package.json
+index 769e9036..df12e7d4 100644
+--- a/frontend/package.json
++++ b/frontend/package.json
+@@ -27,10 +27,10 @@
+     "messageformat-loader": "^0.8.1",
+     "mini-css-extract-plugin": "^0.9.0",
+     "moment": "^2.29.4",
+-    "node-sass": "^9.0.0",
++    "sass": "^1.89.0",
+     "nodemon": "^2.0.2",
+     "numeral": "^2.0.6",
+-    "sass-loader": "^10.0.0",
++    "sass-loader": "^10.4.1",
+     "style-loader": "^1.1.3",
+     "tabler-ui": "git+https://github.com/tabler/tabler.git#00f78ad823311bc3ad974ac3e5b0126198f0a813",
+     "underscore": "^1.12.1",
+-- 
+2.34.1
+
