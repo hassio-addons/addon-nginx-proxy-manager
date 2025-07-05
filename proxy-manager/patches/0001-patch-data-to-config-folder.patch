@@ -1,33 +1,43 @@
-From ebe3b5a97cc52f1d75945b058df1e93ec92688ee Mon Sep 17 00:00:00 2001
-From: Franck Nijhof <git@frenck.dev>
-Date: Fri, 12 Jan 2024 17:00:45 +0100
+From 50e082c4706eb357f76fd47a8cd61e3713dcceab Mon Sep 17 00:00:00 2001
+From: pustekuchen91 <7147324+pustekuchen91@users.noreply.github.com>
+Date: Sat, 5 Jul 2025 11:29:33 +0200
 Subject: [PATCH] Patch /data to /config folder
 
 ---
  backend/internal/access-list.js               |  2 +-
  backend/internal/certificate.js               |  4 +--
- backend/internal/nginx.js                     |  8 ++---
+ backend/internal/nginx.js                     |  8 +++---
  backend/internal/setting.js                   |  2 +-
  backend/lib/config.js                         |  4 +--
  backend/templates/_access.conf                |  2 +-
  backend/templates/_certificates.conf          |  4 +--
- backend/templates/dead_host.conf              |  4 +--
- backend/templates/default.conf                |  6 ++--
+ backend/templates/_certificates_stream.conf   |  4 +--
+ backend/templates/dead_host.conf              |  6 ++---
+ backend/templates/default.conf                |  6 ++---
  backend/templates/letsencrypt-request.conf    |  4 +--
- backend/templates/proxy_host.conf             |  6 ++--
- backend/templates/redirection_host.conf       |  6 ++--
- backend/templates/stream.conf                 |  8 ++---
- docker/rootfs/etc/nginx/conf.d/default.conf   |  6 ++--
+ backend/templates/proxy_host.conf             |  6 ++---
+ backend/templates/redirection_host.conf       |  6 ++---
+ backend/templates/stream.conf                 |  8 +++---
+ docker/dev/letsencrypt.ini                    |  2 +-
+ docker/docker-compose.ci.sqlite.yml           |  2 +-
+ docker/docker-compose.dev.yml                 |  2 +-
+ docker/rootfs/etc/letsencrypt.ini             |  2 +-
+ .../etc/logrotate.d/nginx-proxy-manager       |  4 +--
+ docker/rootfs/etc/nginx/conf.d/default.conf   |  6 ++---
  .../include/letsencrypt-acme-challenge.conf   |  2 +-
- docker/rootfs/etc/nginx/nginx.conf            | 31 ++++++++++---------
- global/certbot-dns-plugins.js                 |  2 +-
- 17 files changed, 51 insertions(+), 50 deletions(-)
+ .../rootfs/etc/nginx/conf.d/include/log.conf  |  2 +-
+ docker/rootfs/etc/nginx/nginx.conf            | 26 +++++++++----------
+ .../s6-overlay/s6-rc.d/prepare/20-paths.sh    | 24 ++++++++---------
+ .../etc/s6-overlay/s6-rc.d/prepare/50-ipv6.sh |  2 +-
+ global/certbot-dns-plugins.json               |  2 +-
+ scripts/ci/fulltest-cypress                   |  2 +-
+ 27 files changed, 72 insertions(+), 72 deletions(-)
 
 diff --git a/backend/internal/access-list.js b/backend/internal/access-list.js
-index 8457792..48415d2 100644
+index f6043e18..330a99c6 100644
 --- a/backend/internal/access-list.js
 +++ b/backend/internal/access-list.js
-@@ -462,7 +462,7 @@ const internalAccessList = {
+@@ -468,7 +468,7 @@ const internalAccessList = {
  	 * @returns {String}
  	 */
  	getFilename: (list) => {
@@ -37,10 +47,10 @@ index 8457792..48415d2 100644
  
  	/**
 diff --git a/backend/internal/certificate.js b/backend/internal/certificate.js
-index 871a280..463bcfd 100644
+index f2e845a2..59442fe6 100644
 --- a/backend/internal/certificate.js
 +++ b/backend/internal/certificate.js
-@@ -520,7 +520,7 @@ const internalCertificate = {
+@@ -521,7 +521,7 @@ const internalCertificate = {
  	writeCustomCert: (certificate) => {
  		logger.info('Writing Custom Certificate:', certificate);
  
@@ -49,7 +59,7 @@ index 871a280..463bcfd 100644
  
  		return new Promise((resolve, reject) => {
  			if (certificate.provider === 'letsencrypt') {
-@@ -1151,7 +1151,7 @@ const internalCertificate = {
+@@ -1149,7 +1149,7 @@ const internalCertificate = {
  		}
  
  		// Create a test challenge file
@@ -59,7 +69,7 @@ index 871a280..463bcfd 100644
  		fs.mkdirSync(testChallengeDir, {recursive: true});
  		fs.writeFileSync(testChallengeFile, 'Success', {encoding: 'utf8'});
 diff --git a/backend/internal/nginx.js b/backend/internal/nginx.js
-index 77933e7..47c3b60 100644
+index 5f802c00..a86186d8 100644
 --- a/backend/internal/nginx.js
 +++ b/backend/internal/nginx.js
 @@ -126,9 +126,9 @@ const internalNginx = {
@@ -74,7 +84,7 @@ index 77933e7..47c3b60 100644
  	},
  
  	/**
-@@ -276,7 +276,7 @@ const internalNginx = {
+@@ -278,7 +278,7 @@ const internalNginx = {
  
  		return new Promise((resolve, reject) => {
  			let template = null;
@@ -83,7 +93,7 @@ index 77933e7..47c3b60 100644
  
  			try {
  				template = fs.readFileSync(__dirname + '/../templates/letsencrypt-request.conf', {encoding: 'utf8'});
-@@ -338,7 +338,7 @@ const internalNginx = {
+@@ -340,7 +340,7 @@ const internalNginx = {
  	 * @returns {Promise}
  	 */
  	deleteLetsEncryptRequestConfig: (certificate) => {
@@ -93,7 +103,7 @@ index 77933e7..47c3b60 100644
  			internalNginx.deleteFile(config_file);
  			resolve();
 diff --git a/backend/internal/setting.js b/backend/internal/setting.js
-index d4ac67d..a7c2a31 100644
+index d4ac67d8..a7c2a313 100644
 --- a/backend/internal/setting.js
 +++ b/backend/internal/setting.js
 @@ -36,7 +36,7 @@ const internalSetting = {
@@ -106,19 +116,19 @@ index d4ac67d..a7c2a31 100644
  
  					// Configure nginx
 diff --git a/backend/lib/config.js b/backend/lib/config.js
-index caa57fc..a04b80b 100644
+index 23184f3e..4681d7db 100644
 --- a/backend/lib/config.js
 +++ b/backend/lib/config.js
 @@ -2,7 +2,7 @@ const fs      = require('fs');
  const NodeRSA = require('node-rsa');
  const logger  = require('../logger').global;
  
--const keysFile = '/data/keys.json';
-+const keysFile = '/config/keys.json';
- 
- let instance = null;
- 
-@@ -46,7 +46,7 @@ const configure = () => {
+-const keysFile         = '/data/keys.json';
++const keysFile         = '/config/keys.json';
+ const mysqlEngine      = 'mysql2';
+ const postgresEngine   = 'pg';
+ const sqliteClientName = 'sqlite3';
+@@ -69,7 +69,7 @@ const configure = () => {
  		return;
  	}
  
@@ -128,7 +138,7 @@ index caa57fc..a04b80b 100644
  	instance = {
  		database: {
 diff --git a/backend/templates/_access.conf b/backend/templates/_access.conf
-index 447006c..e4b6e13 100644
+index f5926377..fdf98f40 100644
 --- a/backend/templates/_access.conf
 +++ b/backend/templates/_access.conf
 @@ -2,7 +2,7 @@
@@ -138,13 +148,13 @@ index 447006c..e4b6e13 100644
 -    auth_basic_user_file  /data/access/{{ access_list_id }};
 +    auth_basic_user_file  /config/access/{{ access_list_id }};
  
-     {% if access_list.pass_auth == 0 %}
+     {% if access_list.pass_auth == 0 or access_list.pass_auth == true %}
      proxy_set_header Authorization "";
 diff --git a/backend/templates/_certificates.conf b/backend/templates/_certificates.conf
-index 06ca7bb..654e5e4 100644
+index efcca5cd..99ba51e6 100644
 --- a/backend/templates/_certificates.conf
 +++ b/backend/templates/_certificates.conf
-@@ -7,8 +7,8 @@
+@@ -8,8 +8,8 @@
    ssl_certificate_key /etc/letsencrypt/live/npm-{{ certificate_id }}/privkey.pem;
  {% else %}
    # Custom SSL
@@ -155,11 +165,25 @@ index 06ca7bb..654e5e4 100644
  {% endif %}
  {% endif %}
  
+diff --git a/backend/templates/_certificates_stream.conf b/backend/templates/_certificates_stream.conf
+index ba7812fd..44762ab2 100644
+--- a/backend/templates/_certificates_stream.conf
++++ b/backend/templates/_certificates_stream.conf
+@@ -7,7 +7,7 @@
+   ssl_certificate_key /etc/letsencrypt/live/npm-{{ certificate_id }}/privkey.pem;
+ {%- else %}
+   # Custom SSL
+-  ssl_certificate /data/custom_ssl/npm-{{ certificate_id }}/fullchain.pem;
+-  ssl_certificate_key /data/custom_ssl/npm-{{ certificate_id }}/privkey.pem;
++  ssl_certificate /config/custom_ssl/npm-{{ certificate_id }}/fullchain.pem;
++  ssl_certificate_key /config/custom_ssl/npm-{{ certificate_id }}/privkey.pem;
+ {%- endif -%}
+ {%- endif -%}
 diff --git a/backend/templates/dead_host.conf b/backend/templates/dead_host.conf
-index d94dff5..3c18acd 100644
+index 2e7d2a00..b7f5209f 100644
 --- a/backend/templates/dead_host.conf
 +++ b/backend/templates/dead_host.conf
-@@ -7,8 +7,8 @@ server {
+@@ -10,8 +10,8 @@ server {
  {% include "_hsts.conf" %}
  {% include "_forced_ssl.conf" %}
  
@@ -170,8 +194,16 @@ index d94dff5..3c18acd 100644
  
  {{ advanced_config }}
  
+@@ -23,6 +23,6 @@ server {
+ {% endif %}
+ 
+   # Custom
+-  include /data/nginx/custom/server_dead[.]conf;
++  include /config/nginx/custom/server_dead[.]conf;
+ }
+ {% endif %}
 diff --git a/backend/templates/default.conf b/backend/templates/default.conf
-index cc590f9..96174e0 100644
+index cc590f9d..96174e03 100644
 --- a/backend/templates/default.conf
 +++ b/backend/templates/default.conf
 @@ -12,8 +12,8 @@ server {
@@ -195,7 +227,7 @@ index cc590f9..96174e0 100644
      try_files $uri /index.html;
    }
 diff --git a/backend/templates/letsencrypt-request.conf b/backend/templates/letsencrypt-request.conf
-index 676c8a6..6bb985b 100644
+index 676c8a60..6bb985b9 100644
 --- a/backend/templates/letsencrypt-request.conf
 +++ b/backend/templates/letsencrypt-request.conf
 @@ -8,8 +8,8 @@ server {
@@ -210,10 +242,10 @@ index 676c8a6..6bb985b 100644
    include conf.d/include/letsencrypt-acme-challenge.conf;
  
 diff --git a/backend/templates/proxy_host.conf b/backend/templates/proxy_host.conf
-index 81a542e..6e6ad83 100644
+index d23ca46f..0de66470 100644
 --- a/backend/templates/proxy_host.conf
 +++ b/backend/templates/proxy_host.conf
-@@ -19,8 +19,8 @@ proxy_set_header Connection $http_connection;
+@@ -22,8 +22,8 @@ proxy_set_header Connection $http_connection;
  proxy_http_version 1.1;
  {% endif %}
  
@@ -224,7 +256,7 @@ index 81a542e..6e6ad83 100644
  
  {{ advanced_config }}
  
-@@ -45,6 +45,6 @@ proxy_http_version 1.1;
+@@ -48,6 +48,6 @@ proxy_http_version 1.1;
  {% endif %}
  
    # Custom
@@ -233,10 +265,10 @@ index 81a542e..6e6ad83 100644
  }
  {% endif %}
 diff --git a/backend/templates/redirection_host.conf b/backend/templates/redirection_host.conf
-index 339fe72..957ecc7 100644
+index 7dd36079..61ee0c2d 100644
 --- a/backend/templates/redirection_host.conf
 +++ b/backend/templates/redirection_host.conf
-@@ -9,8 +9,8 @@ server {
+@@ -12,8 +12,8 @@ server {
  {% include "_hsts.conf" %}
  {% include "_forced_ssl.conf" %}
  
@@ -247,7 +279,7 @@ index 339fe72..957ecc7 100644
  
  {{ advanced_config }}
  
-@@ -27,6 +27,6 @@ server {
+@@ -30,6 +30,6 @@ server {
  {% endif %}
  
    # Custom
@@ -256,10 +288,10 @@ index 339fe72..957ecc7 100644
  }
  {% endif %}
 diff --git a/backend/templates/stream.conf b/backend/templates/stream.conf
-index 76159a6..37eab14 100644
+index 7333aaee..3879f0cc 100644
 --- a/backend/templates/stream.conf
 +++ b/backend/templates/stream.conf
-@@ -15,8 +15,8 @@ server {
+@@ -13,8 +13,8 @@ server {
    proxy_pass {{ forwarding_host }}:{{ forwarding_port }};
  
    # Custom
@@ -269,8 +301,8 @@ index 76159a6..37eab14 100644
 +  include /config/nginx/custom/server_stream_tcp[.]conf;
  }
  {% endif %}
- {% if udp_forwarding == 1 or udp_forwarding == true %}
-@@ -30,8 +30,8 @@ server {
+ 
+@@ -26,8 +26,8 @@ server {
    proxy_pass {{ forwarding_host }}:{{ forwarding_port }};
  
    # Custom
@@ -282,8 +314,77 @@ index 76159a6..37eab14 100644
  {% endif %}
  {% endif %}
 \ No newline at end of file
+diff --git a/docker/dev/letsencrypt.ini b/docker/dev/letsencrypt.ini
+index 93647b64..1a964829 100644
+--- a/docker/dev/letsencrypt.ini
++++ b/docker/dev/letsencrypt.ini
+@@ -1,6 +1,6 @@
+ text = True
+ non-interactive = True
+-webroot-path = /data/letsencrypt-acme-challenge
++webroot-path = /config/letsencrypt-acme-challenge
+ key-type = ecdsa
+ elliptic-curve = secp384r1
+ preferred-chain = ISRG Root X1
+diff --git a/docker/docker-compose.ci.sqlite.yml b/docker/docker-compose.ci.sqlite.yml
+index 1c5be48e..278298a6 100644
+--- a/docker/docker-compose.ci.sqlite.yml
++++ b/docker/docker-compose.ci.sqlite.yml
+@@ -3,7 +3,7 @@ services:
+ 
+   fullstack:
+     environment:
+-      DB_SQLITE_FILE: '/data/mydb.sqlite'
++      DB_SQLITE_FILE: '/config/mydb.sqlite'
+       PUID: 1000
+       PGID: 1000
+       DISABLE_IPV6: 'true'
+diff --git a/docker/docker-compose.dev.yml b/docker/docker-compose.dev.yml
+index 5abe057b..e6ff1a40 100644
+--- a/docker/docker-compose.dev.yml
++++ b/docker/docker-compose.dev.yml
+@@ -37,7 +37,7 @@ services:
+       DB_POSTGRES_USER: 'npm'
+       DB_POSTGRES_PASSWORD: 'npmpass'
+       DB_POSTGRES_NAME: 'npm'
+-      # DB_SQLITE_FILE: "/data/database.sqlite"
++      # DB_SQLITE_FILE: "/config/database.sqlite"
+       # DISABLE_IPV6: "true"
+       # Required for DNS Certificate provisioning testing:
+       LE_SERVER: 'https://ca.internal/acme/acme/directory'
+diff --git a/docker/rootfs/etc/letsencrypt.ini b/docker/rootfs/etc/letsencrypt.ini
+index aae53b90..5ec4b079 100644
+--- a/docker/rootfs/etc/letsencrypt.ini
++++ b/docker/rootfs/etc/letsencrypt.ini
+@@ -1,6 +1,6 @@
+ text = True
+ non-interactive = True
+-webroot-path = /data/letsencrypt-acme-challenge
++webroot-path = /config/letsencrypt-acme-challenge
+ key-type = ecdsa
+ elliptic-curve = secp384r1
+ preferred-chain = ISRG Root X1
+diff --git a/docker/rootfs/etc/logrotate.d/nginx-proxy-manager b/docker/rootfs/etc/logrotate.d/nginx-proxy-manager
+index de977297..77f26f97 100644
+--- a/docker/rootfs/etc/logrotate.d/nginx-proxy-manager
++++ b/docker/rootfs/etc/logrotate.d/nginx-proxy-manager
+@@ -1,4 +1,4 @@
+-/data/logs/*_access.log /data/logs/*/access.log {
++/config/logs/*_access.log /config/logs/*/access.log {
+     su npm npm
+     create 0644
+     weekly
+@@ -12,7 +12,7 @@
+     endscript
+ }
+ 
+-/data/logs/*_error.log /data/logs/*/error.log {
++/config/logs/*_error.log /config/logs/*/error.log {
+     su npm npm
+     create 0644
+     weekly
 diff --git a/docker/rootfs/etc/nginx/conf.d/default.conf b/docker/rootfs/etc/nginx/conf.d/default.conf
-index e4262e1..a3dcfbd 100644
+index e4262e1d..a3dcfbd5 100644
 --- a/docker/rootfs/etc/nginx/conf.d/default.conf
 +++ b/docker/rootfs/etc/nginx/conf.d/default.conf
 @@ -8,8 +8,8 @@ server {
@@ -307,7 +408,7 @@ index e4262e1..a3dcfbd 100644
  	include conf.d/include/ssl-ciphers.conf;
  	ssl_reject_handshake on;
 diff --git a/docker/rootfs/etc/nginx/conf.d/include/letsencrypt-acme-challenge.conf b/docker/rootfs/etc/nginx/conf.d/include/letsencrypt-acme-challenge.conf
-index ff2a782..0225bc5 100644
+index ff2a7827..0225bc5f 100644
 --- a/docker/rootfs/etc/nginx/conf.d/include/letsencrypt-acme-challenge.conf
 +++ b/docker/rootfs/etc/nginx/conf.d/include/letsencrypt-acme-challenge.conf
 @@ -19,7 +19,7 @@ location ^~ /.well-known/acme-challenge/ {
@@ -319,18 +420,21 @@ index ff2a782..0225bc5 100644
  }
  
  # Hide /acme-challenge subdirectory and return 404 on all requests.
+diff --git a/docker/rootfs/etc/nginx/conf.d/include/log.conf b/docker/rootfs/etc/nginx/conf.d/include/log.conf
+index 0d740290..29f1a7a3 100644
+--- a/docker/rootfs/etc/nginx/conf.d/include/log.conf
++++ b/docker/rootfs/etc/nginx/conf.d/include/log.conf
+@@ -1,4 +1,4 @@
+ log_format proxy '[$time_local] $upstream_cache_status $upstream_status $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] [Sent-to $server] "$http_user_agent" "$http_referer"';
+ log_format standard '[$time_local] $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] "$http_user_agent" "$http_referer"';
+ 
+-access_log /data/logs/fallback_access.log proxy;
++access_log /config/logs/fallback_access.log proxy;
 diff --git a/docker/rootfs/etc/nginx/nginx.conf b/docker/rootfs/etc/nginx/nginx.conf
-index 8261833..8d3ca91 100644
+index 3a31e14c..37f3395e 100644
 --- a/docker/rootfs/etc/nginx/nginx.conf
 +++ b/docker/rootfs/etc/nginx/nginx.conf
-@@ -1,5 +1,6 @@
- # run nginx in foreground
- daemon off;
-+load_module /usr/lib/nginx/modules/ngx_stream_module.so;
- pid /run/nginx/nginx.pid;
- user npm;
- 
-@@ -9,13 +10,13 @@ worker_processes auto;
+@@ -9,16 +9,16 @@ worker_processes auto;
  # Enables the use of JIT for regular expressions to speed-up their processing.
  pcre_jit on;
  
@@ -340,30 +444,17 @@ index 8261833..8d3ca91 100644
  # Includes files with directives to load dynamic modules.
  include /etc/nginx/modules/*.conf;
  
+ # Custom
+-include /data/nginx/custom/root_top[.]conf;
++include /config/nginx/custom/root_top[.]conf;
+ 
  events {
 -	include /data/nginx/custom/events[.]conf;
 +	include /config/nginx/custom/events[.]conf;
  }
  
  http {
-@@ -40,13 +41,13 @@ http {
- 	proxy_set_header              X-Forwarded-For $proxy_add_x_forwarded_for;
- 	proxy_set_header              Accept-Encoding "";
- 	proxy_cache                   off;
--	proxy_cache_path              /var/lib/nginx/cache/public  levels=1:2 keys_zone=public-cache:30m max_size=192m;
--	proxy_cache_path              /var/lib/nginx/cache/private levels=1:2 keys_zone=private-cache:5m max_size=1024m;
-+	proxy_cache_path              /tmp/nginx/cache/public  levels=1:2 keys_zone=public-cache:30m max_size=192m;
-+	proxy_cache_path              /tmp/nginx/cache/private levels=1:2 keys_zone=private-cache:5m max_size=1024m;
- 
- 	log_format proxy '[$time_local] $upstream_cache_status $upstream_status $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] [Sent-to $server] "$http_user_agent" "$http_referer"';
- 	log_format standard '[$time_local] $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] "$http_user_agent" "$http_referer"';
- 
--	access_log /data/logs/fallback_access.log proxy;
-+	access_log /config/logs/fallback_access.log proxy;
- 
- 	# Dynamically generated resolvers file
- 	include /etc/nginx/conf.d/include/resolvers.conf;
-@@ -69,27 +70,27 @@ http {
+@@ -70,27 +70,27 @@ http {
  	real_ip_recursive on;
  
  	# Custom
@@ -401,19 +492,77 @@ index 8261833..8d3ca91 100644
  # Custom
 -include /data/nginx/custom/root[.]conf;
 +include /config/nginx/custom/root[.]conf;
-diff --git a/global/certbot-dns-plugins.js b/global/certbot-dns-plugins.js
-index 78c67ed..f695cca 100644
---- a/global/certbot-dns-plugins.js
-+++ b/global/certbot-dns-plugins.js
-@@ -27,7 +27,7 @@ module.exports = {
- 		version_requirement: '~=0.1.0',
- 		dependencies:        '',
- 		credentials:         `dns_acmedns_api_url = http://acmedns-server/
--dns_acmedns_registration_file = /data/acme-registration.json`,
-+dns_acmedns_registration_file = /config/acme-registration.json`,
- 		full_plugin_name: 'dns-acmedns',
+diff --git a/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/20-paths.sh b/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/20-paths.sh
+index 2f59ef41..e0a057ae 100755
+--- a/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/20-paths.sh
++++ b/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/20-paths.sh
+@@ -16,18 +16,18 @@ fi
+ 
+ # Create required folders
+ mkdir -p \
+-	/data/nginx \
+-	/data/custom_ssl \
+-	/data/logs \
+-	/data/access \
+-	/data/nginx/default_host \
+-	/data/nginx/default_www \
+-	/data/nginx/proxy_host \
+-	/data/nginx/redirection_host \
+-	/data/nginx/stream \
+-	/data/nginx/dead_host \
+-	/data/nginx/temp \
+-	/data/letsencrypt-acme-challenge \
++	/config/nginx \
++	/config/custom_ssl \
++	/config/logs \
++	/config/access \
++	/config/nginx/default_host \
++	/config/nginx/default_www \
++	/config/nginx/proxy_host \
++	/config/nginx/redirection_host \
++	/config/nginx/stream \
++	/config/nginx/dead_host \
++	/config/nginx/temp \
++	/config/letsencrypt-acme-challenge \
+ 	/run/nginx \
+ 	/tmp/nginx/body \
+ 	/var/log/nginx \
+diff --git a/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/50-ipv6.sh b/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/50-ipv6.sh
+index 0c4d261c..36f0dbf9 100755
+--- a/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/50-ipv6.sh
++++ b/docker/rootfs/etc/s6-overlay/s6-rc.d/prepare/50-ipv6.sh
+@@ -36,4 +36,4 @@ process_folder () {
+ }
+ 
+ process_folder /etc/nginx/conf.d
+-process_folder /data/nginx
++process_folder /config/nginx
+diff --git a/global/certbot-dns-plugins.json b/global/certbot-dns-plugins.json
+index 65e45f3a..5c71fbff 100644
+--- a/global/certbot-dns-plugins.json
++++ b/global/certbot-dns-plugins.json
+@@ -4,7 +4,7 @@
+ 		"package_name": "certbot-dns-acmedns",
+ 		"version": "~=0.1.0",
+ 		"dependencies": "",
+-		"credentials": "dns_acmedns_api_url = http://acmedns-server/\ndns_acmedns_registration_file = /data/acme-registration.json",
++		"credentials": "dns_acmedns_api_url = http://acmedns-server/\ndns_acmedns_registration_file = /config/acme-registration.json",
+ 		"full_plugin_name": "dns-acmedns"
  	},
- 	aliyun: {
+ 	"active24": {
+diff --git a/scripts/ci/fulltest-cypress b/scripts/ci/fulltest-cypress
+index c7255ffb..cf6687fb 100755
+--- a/scripts/ci/fulltest-cypress
++++ b/scripts/ci/fulltest-cypress
+@@ -80,7 +80,7 @@ docker-compose up --build cypress
+ 
+ # Get results
+ docker cp -L "$(docker-compose ps --all -q cypress):/test/results" "$DIR/../../test/"
+-docker cp -L "$(docker-compose ps --all -q fullstack):/data/logs" "$DIR/../../test/results/"
++docker cp -L "$(docker-compose ps --all -q fullstack):/config/logs" "$DIR/../../test/results/"
+ 
+ if [ "$2" = "cleanup" ]; then
+ 	echo -e "${BLUE}❯ ${CYAN}Cleaning up containers ...${RESET}"
 -- 
-2.39.2
+2.34.1
 
