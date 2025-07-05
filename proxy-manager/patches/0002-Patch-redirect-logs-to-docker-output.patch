@@ -1,23 +1,24 @@
-From 01d546e60304dd2fbe83d447886443b492d87724 Mon Sep 17 00:00:00 2001
+From 58a397ae6160c8f91721d54dea789097a56b8bf9 Mon Sep 17 00:00:00 2001
 From: Franck Nijhof <git@frenck.dev>
 Date: Fri, 12 Jan 2024 17:14:53 +0100
-Subject: [PATCH] Patch redirect logs to docker output
+Subject: [PATCH 2/3] Patch redirect logs to docker output
 
 ---
- backend/templates/dead_host.conf            | 4 ++--
- backend/templates/default.conf              | 4 ++--
- backend/templates/letsencrypt-request.conf  | 4 ++--
- backend/templates/proxy_host.conf           | 4 ++--
- backend/templates/redirection_host.conf     | 4 ++--
- docker/rootfs/etc/nginx/conf.d/default.conf | 6 +++---
- docker/rootfs/etc/nginx/nginx.conf          | 4 ++--
- 7 files changed, 15 insertions(+), 15 deletions(-)
+ backend/templates/dead_host.conf                | 4 ++--
+ backend/templates/default.conf                  | 4 ++--
+ backend/templates/letsencrypt-request.conf      | 4 ++--
+ backend/templates/proxy_host.conf               | 4 ++--
+ backend/templates/redirection_host.conf         | 4 ++--
+ docker/rootfs/etc/nginx/conf.d/default.conf     | 6 +++---
+ docker/rootfs/etc/nginx/conf.d/include/log.conf | 2 +-
+ docker/rootfs/etc/nginx/nginx.conf              | 2 +-
+ 8 files changed, 15 insertions(+), 15 deletions(-)
 
 diff --git a/backend/templates/dead_host.conf b/backend/templates/dead_host.conf
-index 3c18acd..72ecea5 100644
+index 4605a93..8149261 100644
 --- a/backend/templates/dead_host.conf
 +++ b/backend/templates/dead_host.conf
-@@ -7,8 +7,8 @@ server {
+@@ -10,8 +10,8 @@ server {
  {% include "_hsts.conf" %}
  {% include "_forced_ssl.conf" %}
  
@@ -59,10 +60,10 @@ index 6bb985b..675b874 100644
    include conf.d/include/letsencrypt-acme-challenge.conf;
  
 diff --git a/backend/templates/proxy_host.conf b/backend/templates/proxy_host.conf
-index 6e6ad83..a5853f1 100644
+index 0de6647..c3c7490 100644
 --- a/backend/templates/proxy_host.conf
 +++ b/backend/templates/proxy_host.conf
-@@ -19,8 +19,8 @@ proxy_set_header Connection $http_connection;
+@@ -22,8 +22,8 @@ proxy_set_header Connection $http_connection;
  proxy_http_version 1.1;
  {% endif %}
  
@@ -74,10 +75,10 @@ index 6e6ad83..a5853f1 100644
  {{ advanced_config }}
  
 diff --git a/backend/templates/redirection_host.conf b/backend/templates/redirection_host.conf
-index 957ecc7..a1d6bc4 100644
+index 61ee0c2..3377364 100644
 --- a/backend/templates/redirection_host.conf
 +++ b/backend/templates/redirection_host.conf
-@@ -9,8 +9,8 @@ server {
+@@ -12,8 +12,8 @@ server {
  {% include "_hsts.conf" %}
  {% include "_forced_ssl.conf" %}
  
@@ -112,8 +113,18 @@ index a3dcfbd..4a6108a 100644
  	error_log /dev/null crit;
  	include conf.d/include/ssl-ciphers.conf;
  	ssl_reject_handshake on;
+diff --git a/docker/rootfs/etc/nginx/conf.d/include/log.conf b/docker/rootfs/etc/nginx/conf.d/include/log.conf
+index 29f1a7a..1877713 100644
+--- a/docker/rootfs/etc/nginx/conf.d/include/log.conf
++++ b/docker/rootfs/etc/nginx/conf.d/include/log.conf
+@@ -1,4 +1,4 @@
+ log_format proxy '[$time_local] $upstream_cache_status $upstream_status $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] [Sent-to $server] "$http_user_agent" "$http_referer"';
+ log_format standard '[$time_local] $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] "$http_user_agent" "$http_referer"';
+ 
+-access_log /config/logs/fallback_access.log proxy;
++access_log /proc/1/fd/1 proxy;
 diff --git a/docker/rootfs/etc/nginx/nginx.conf b/docker/rootfs/etc/nginx/nginx.conf
-index 8d3ca91..fdd4138 100644
+index ae96614..522a699 100644
 --- a/docker/rootfs/etc/nginx/nginx.conf
 +++ b/docker/rootfs/etc/nginx/nginx.conf
 @@ -10,7 +10,7 @@ worker_processes auto;
@@ -125,15 +136,6 @@ index 8d3ca91..fdd4138 100644
  
  # Includes files with directives to load dynamic modules.
  include /etc/nginx/modules/*.conf;
-@@ -47,7 +47,7 @@ http {
- 	log_format proxy '[$time_local] $upstream_cache_status $upstream_status $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] [Sent-to $server] "$http_user_agent" "$http_referer"';
- 	log_format standard '[$time_local] $status - $request_method $scheme $host "$request_uri" [Client $remote_addr] [Length $body_bytes_sent] [Gzip $gzip_ratio] "$http_user_agent" "$http_referer"';
- 
--	access_log /config/logs/fallback_access.log proxy;
-+	access_log /proc/1/fd/1 proxy;
- 
- 	# Dynamically generated resolvers file
- 	include /etc/nginx/conf.d/include/resolvers.conf;
 -- 
-2.39.2
+2.42.0
 
