@@ -8,8 +8,7 @@ ENV NODE_OPTIONS="--openssl-legacy-provider"
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy Python requirements file & patches
-COPY requirements.txt /tmp/
+# Copy patches
 COPY patches/*.patch /usr/src/
 
 # Setup base
@@ -37,8 +36,6 @@ RUN \
         py3-pip=25.1.1-r0 \
         python3=3.12.11-r0 \
         yarn=1.22.22-r1 \
-    \
-    && pip3 install -r /tmp/requirements.txt \
     \
     && yarn global add modclean \
     \
