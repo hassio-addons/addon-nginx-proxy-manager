@@ -24,7 +24,7 @@ RUN \
         python3-dev=3.12.11-r0 \
     \
     && apk add --no-cache \
-        apache2-utils=2.4.63-r4 \
+        apache2-utils=2.4.65-r0 \
         certbot=4.0.0-r0 \
         libcap=2.76-r0 \
         logrotate=3.21.0-r1 \
