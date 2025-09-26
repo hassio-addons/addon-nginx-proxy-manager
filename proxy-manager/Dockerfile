@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY patches/*.patch /usr/src/
 
 # Setup base
-ARG NGINX_PROXY_MANAGER_VERSION="v2.12.4"
+ARG NGINX_PROXY_MANAGER_VERSION="v2.12.6"
 # hadolint ignore=DL3003,DL3042
 RUN \
     apk add --no-cache --virtual .build-dependencies \
