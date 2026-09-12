@@ -17,7 +17,7 @@ RUN \
     \
     && apt-get install -y --no-install-recommends \
         apache2-utils=2.4.68-1~deb13u1 \
-        libcap2-bin=1:2.75-10+deb13u1+b1 \
+        libcap2-bin=1:2.75-10+deb13u1+b3 \
     # logrotate has been rebuilt on aarch64 but not amd64, so its version
     # carries a binNMU suffix on one architecture only. Match the Debian
     # revision and let the suffix vary.
